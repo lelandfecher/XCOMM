@@ -1,0 +1,46 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'netbeans'
+apply plugin: 'jacoco'
+
+
+mainClassName = "Menu"
+
+// Ensure Java 1.7 compatibility
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // Include all jars in lib folder:
+    compile fileTree(dir: 'lib', include: ['*.jar'])
+
+    compile 'com.squareup.okhttp3:okhttp:3.0.0-RC1'
+    compile 'javax.media:jmf:2.1.1e'
+
+    testCompile 'junit:junit:4.12'
+}
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': "$mainClassName"
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+            {
+                exclude "META-INF/*.SF"
+                exclude "META-INF/*.DSA"
+                exclude "META-INF/*.RSA"
+            }
+    with jar
+}
+
+artifacts {
+    archives fatJar
+}
