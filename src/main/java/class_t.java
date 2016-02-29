@@ -1,34 +1,53 @@
-import java.util.ArrayList;
 
-public class class_t
+
+import java.io.Serializable;
+import java.util.Vector;
+
+public class Class_t implements Serializable
 {
-	public class_t()
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private Vector<Student> m_students;
+	private String m_name;
+	
+	private String[] statuses = {"Absent", "Present", "Tardy"};
+
+	public Class_t(String name)
 	{
-		students = new ArrayList<student_t>();
-		name = null;
+		m_students = new Vector<Student>();
+		m_name = name;
 	}
 	
-	public ArrayList<student_t> students;
-	private String name;
+
 	
 	public String getName()
 	{
-		return name;
+		return m_name;
 	}
 	
-	public void setName(String arg)
+	public void setName(String name)
 	{
-		name = arg;
+		m_name = name;
+	}
+	
+	public Vector<Student> getStudents() {
+		return m_students;
+	}
+	
+	public void addStudent(String name) {
+		m_students.add(new Student(name));
 	}
 	
 	public Object[][] toObjectField()
 	{
-		Object[][] ret = new Object[students.size()][3];
-		for (int i = 0; i < students.size(); i++)
+		Object[][] ret = new Object[m_students.size()][3];
+		for (int i = 0; i < m_students.size(); i++)
 		{
-			ret[i][0] = students.get(i).getName();
-			ret[i][1] = students.get(i).isPresent();
-			ret[i][2] = students.get(i).isTardy();
+			ret[i][0] = m_students.get(i).getName();
+			ret[i][1] = statuses;
 		}
 		return ret;
 	}
