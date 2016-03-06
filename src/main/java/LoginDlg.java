@@ -1,9 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.util.Arrays;
 import java.util.Vector;
 
 public class LoginDlg extends JDialog {
@@ -20,6 +18,7 @@ public class LoginDlg extends JDialog {
 
     public LoginDlg(Frame f, String title) {
         super(f, title, true);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         correctCombo = false;
         m_instructors = InstructorDataStore.getInstructors();
 
@@ -42,23 +41,21 @@ public class LoginDlg extends JDialog {
         final JLabel password = new JLabel("Password:");//create label and passwordfield for password, and add it to the 1st panel
         second.add(password);
         pwd = new JPasswordField(15);
+        pwd.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == 10) {//Keycode for Enter
+                    trySignin();
+                }
+            }
+        });
         password.setLabelFor(pwd);
         second.add(pwd);
 
         final JButton signinButton = new JButton("Sign-In");    //create signin Button
         signinButton.addMouseListener(new MouseAdapter() {        //create actionListener for when it is pressed
             public void mouseClicked(MouseEvent arg0) {
-                JPanel panel = new JPanel();
-                for (int i = 0; i < m_instructors.size(); i++) {
-                    if (name.getText().contentEquals(m_instructors.get(i).getName()) || pwd.getPassword().equals(m_instructors.get(i).getPassword())) {
-                        JOptionPane.showMessageDialog(panel, "Welcome " + name.getText() + "!", null, JOptionPane.DEFAULT_OPTION/*, new ImageIcon("SORS.png")*/);
-                        correctCombo = true;
-                        whichInstructor = i;
-                        dispose();
-                    } else if (i == m_instructors.size() - 1) {
-                        JOptionPane.showMessageDialog(panel, "Username/Password Combination Not Found", "ERROR", JOptionPane.DEFAULT_OPTION);
-                    }
-                }
+                trySignin();
             }
         });
         southpanel.add(signinButton, BorderLayout.WEST);
@@ -67,6 +64,7 @@ public class LoginDlg extends JDialog {
         final JButton cancelButton = new JButton("Cancel");    //create cancel Button
         cancelButton.addMouseListener(new MouseAdapter() {        //create actionListener for when it is pressed
             public void mouseClicked(MouseEvent arg0) {
+
                 System.exit(EXIT_ON_CLOSE);
             }
         });
@@ -92,5 +90,19 @@ public class LoginDlg extends JDialog {
 
     public int getWhichInstructor() {
         return whichInstructor;
+    }
+
+    private void trySignin() {
+        JPanel panel = new JPanel();
+        for (int i = 0; i < m_instructors.size(); i++) {
+            if (name.getText().contentEquals(m_instructors.get(i).getName()) && Arrays.equals(pwd.getPassword(), m_instructors.get(i).getPassword().toCharArray())) {
+                JOptionPane.showMessageDialog(panel, "Welcome " + name.getText() + "!", null, JOptionPane.PLAIN_MESSAGE/*, new ImageIcon("SORS.png")*/);
+                correctCombo = true;
+                whichInstructor = i;
+                this.dispose();
+            } else if (i == m_instructors.size() - 1) {
+                JOptionPane.showMessageDialog(panel, "Username/Password Combination Not Found", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 }

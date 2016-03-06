@@ -27,6 +27,8 @@ public class ClassMainFrame extends JFrame {
         //Call super constructor to set up JFrame
         super(title);
 
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         //Set window size
         this.setSize(new Dimension(840, 589));
 
