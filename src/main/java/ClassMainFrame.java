@@ -1,10 +1,13 @@
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.Vector;
 
 
 public class ClassMainFrame extends JFrame {
@@ -31,7 +34,7 @@ public class ClassMainFrame extends JFrame {
 
         //Set window size
         this.setSize(new Dimension(840, 589));
-
+        
         m_whichInstructor = whichInstructor;
 
         //Set Icon image
@@ -55,11 +58,16 @@ public class ClassMainFrame extends JFrame {
         JPanel buttonPanel = new JPanel();
         this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
+        
+        //Set up list model
+        //final DefaultListModel<Object> listModel = new DefaultListModel<Object>();
         final JList<Object> m_list = new JList<Object>(list);
+        
+        
         final JTable m_table = new JTable();
 
         //Set up table model
-        final DefaultTableModel model = new DefaultTableModel(
+        final DefaultTableModel tableModel = new DefaultTableModel(
                 InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(0).toObjectField(),
                 new String[]{
                         "Student", "Status"
@@ -71,7 +79,7 @@ public class ClassMainFrame extends JFrame {
             private static final long serialVersionUID = 1L;
             @SuppressWarnings("rawtypes")
             Class[] columnTypes = new Class[]{
-                    String.class, JComboBox.class
+                    String.class, String.class
             };
 
             public Class<?> getColumnClass(int columnIndex) {
@@ -88,7 +96,7 @@ public class ClassMainFrame extends JFrame {
                 }
             }
         };
-        m_table.setModel(model);
+        m_table.setModel(tableModel);
 
         //Create menuBar and set it as this frame's menuBar
         JMenuBar menuBar = new JMenuBar();
@@ -122,11 +130,8 @@ public class ClassMainFrame extends JFrame {
             public void mouseReleased(MouseEvent arg0) {
                 String name = JOptionPane.showInputDialog("Class name: ");
                 if (name != null) {
-                    //Class_t temp = new Class_t(name);
                     InstructorDataStore.getInstructors().get(m_whichInstructor).addClass(name);
-                    //m_table.fireTableRowsInserted(0, m_table.getRowCount());
-                    //update_list(list);
-                    //model.addRow(new Object[] {"",false,false});
+                    update_list(m_list);
                 }
             }
         });
@@ -136,9 +141,8 @@ public class ClassMainFrame extends JFrame {
         removeClassMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                InstructorDataStore.getInstructors().get(whichInstructor).getClasses().remove(m_table.getSelectedRow());
-
-//				update_list(list);
+                InstructorDataStore.getInstructors().get(m_whichInstructor).removeClass(m_list.getSelectedIndex());
+				update_list(m_list);
             }
         });
         editMenu.add(removeClassMenuItem);
@@ -160,7 +164,7 @@ public class ClassMainFrame extends JFrame {
         this.setJMenuBar(menuBar);
 
 
-        JButton addButton = new JButton("Add");
+        final JButton addButton = new JButton("Add");
         final JButton editButton = new JButton("Edit");
         final JButton deleteButton = new JButton("Delete");
 
@@ -171,13 +175,15 @@ public class ClassMainFrame extends JFrame {
                 if (name != null) {
                     //table.addRow(new Object[] {name, false, false});
                     InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex()).addStudent(name);
+                    ((DefaultTableModel) m_table.getModel()).fireTableDataChanged();
 //					whichClass.addStudent(name);
 //					table.fireTableDataChanged();
                 }
             }
         });
         buttonPanel.add(addButton, BorderLayout.SOUTH);
-        if (InstructorDataStore.getInstructors().size() == 0)
+        if (InstructorDataStore.getInstructors().size() == 0
+        		|| m_list.getSelectedIndex() == -1)
             addButton.setEnabled(false);
 
         editButton.addMouseListener(new MouseAdapter() {
@@ -242,15 +248,24 @@ public class ClassMainFrame extends JFrame {
 
             public void valueChanged(ListSelectionEvent arg0) {
                 //skip = true;
-                whichClass = InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex());
-                while (model.getRowCount() != 0) {
-                    model.removeRow(0);
+            	
+            	//Check to see if some class is selected (will be -1 if a class has just been deleted)
+            	if (m_list.getSelectedIndex() == -1) {
+            		whichClass = InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(0);
+            	} else {
+            		whichClass = InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex());
+            	}
+            	while (tableModel.getRowCount() != 0) {
+                    tableModel.removeRow(0);
                 }
                 for (int i = 0; i < whichClass.getStudents().size(); i++) {
-                    model.addRow(new Object[]{InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getName(), InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getStatus()});
+                    //TODO
+                	//BUG here with adding/deleting classes
+                	tableModel.addRow(new Object[]{InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getName(), InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getStatus()});
                 }
                 editButton.setEnabled(false);
                 deleteButton.setEnabled(false);
+                addButton.setEnabled(true);
                 //skip = false;
             }
         });
@@ -266,24 +281,25 @@ public class ClassMainFrame extends JFrame {
         });
     }
 
-//	void update_list(JList<String> list)
-//	{
-//		final String[] class_names = new String[classes.size()];
-//		for (int i = 0; i < classes.size(); ++i)
-//			class_names[i] = classes.get(i).getName();
-//		list.setModel(new AbstractListModel<String>() {
-//			/**
-//			 * 
-//			 */
-//			private static final long serialVersionUID = 1L;
-//			String[] values = class_names;
-//			public int getSize() {
-//				return values.length;
-//			}
-//			public String getElementAt(int index) {
-//				return values[index];
-//			}
-//		});
-//		list.setSelectedIndex(classes.size() - 1);
-//	}
+	void update_list(JList<Object> m_list)
+	{
+		Vector<Class_t> classes = InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses();
+		final String[] class_names = new String[classes.size()];
+		for (int i = 0; i < classes.size(); ++i)
+			class_names[i] = classes.get(i).getName();
+		m_list.setModel(new AbstractListModel<Object>() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+			String[] values = class_names;
+			public int getSize() {
+				return values.length;
+			}
+			public String getElementAt(int index) {
+				return values[index];
+			}
+		});
+		m_list.setSelectedIndex(classes.size() - 1);
+	}
 }

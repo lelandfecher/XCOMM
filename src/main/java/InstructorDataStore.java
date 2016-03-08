@@ -21,7 +21,7 @@ public class InstructorDataStore extends AbstractListModel<Object> {
     //Constructor (Private for Singleton)
     private InstructorDataStore() {
         m_instructors = new Vector<Instructor>();
-        m_instructors.add(new Instructor("Austin", "password"));
+        m_instructors.add(new Instructor("a", "a"));
         whichInstructor = 0;
     }
 

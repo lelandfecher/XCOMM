@@ -39,9 +39,17 @@ public class Instructor implements Serializable {
     public Vector<Class_t> getClasses() {
         return m_classes;
     }
+    
+    public Object[] getClassesAsObj() {
+    	return m_classes.toArray();
+    }
 
     public void addClass(String name) {
         m_classes.add(new Class_t(name));
+    }
+    
+    public void removeClass(int index) {
+        m_classes.remove(index);
     }
 
 
