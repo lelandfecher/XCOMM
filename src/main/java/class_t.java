@@ -47,7 +47,7 @@ public class Class_t implements Serializable
 		for (int i = 0; i < m_students.size(); i++)
 		{
 			ret[i][0] = m_students.get(i).getName();
-			ret[i][1] = statuses;
+			ret[i][1] = m_students.get(i).getStatus();
 		}
 		return ret;
 	}
