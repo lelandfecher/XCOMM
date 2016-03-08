@@ -8,6 +8,8 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Vector;
 
 //TODO Update to work with updated data structures when changes are made
 public class CSVPort
