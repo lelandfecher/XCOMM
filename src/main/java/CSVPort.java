@@ -16,11 +16,12 @@ public class CSVPort
 {
 	static public Class_t importClass(Class_t classObj, String filePath) throws IOException
 	{
-		List<String> lines = Files.readAllLines(Paths.get(filePath), StandardCharsets.US_ASCII);
+		List<String> lines = Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8);
+		lines.remove(0);
 		for (String line : lines)
 		{
 			String[] cols = line.split(",");
-			classObj.addStudent(cols[1] + " " + cols[0]);
+			classObj.addStudent((cols[1] + " " + cols[0]).replaceAll("\"", ""));
 		}
 		return classObj;
 	}
@@ -41,5 +42,6 @@ public class CSVPort
 		PrintWriter out = new PrintWriter(filePath);
 		for (String line : lines)
 			out.println(line);
+		out.close();
 	}
 }
