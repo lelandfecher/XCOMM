@@ -1,9 +1,7 @@
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -230,6 +228,7 @@ public class ClassMainFrame extends JFrame {
         JSplitPane splitPane = new JSplitPane();
         splitPane.setLeftComponent(leftScrollPane);
         splitPane.setRightComponent(rightScrollPane);
+        splitPane.setDividerLocation(200);
 
         mainPanel.add(splitPane, BorderLayout.NORTH);
 
