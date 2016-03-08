@@ -1,4 +1,4 @@
-package main.java;
+
 
 import java.util.List;
 import java.util.Vector;
@@ -22,7 +22,7 @@ public class CSVPort
 		for (String line : lines)
 		{
 			String[] cols = line.split(",");
-			classObj.addStudent((cols[1] + " " + cols[0]).replaceAll("\"", ""));
+			//classObj.addStudent((cols[1] + " " + cols[0]).replaceAll("\"", ""));
 		}
 		return classObj;
 	}
@@ -34,9 +34,9 @@ public class CSVPort
 		String fileText = "Last Name,First Name,Username,Student ID,Availability,Weighted Total [Total Pts: up to 0],Total [Total Pts: up to 100],Test 1 [Total Pts: 100]\n";
 		for (Student student : students)
 		{
-			fileText += student.getName().split(" ")[1];
+			//fileText += student.getName().split(" ")[1];
 			fileText += ",";
-			fileText += student.getName().split(" ")[0];
+			//fileText += student.getName().split(" ")[0];
 			fileText += ",NULL,NULL,Yes,,100,100\n";
 		}
 		

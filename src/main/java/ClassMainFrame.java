@@ -70,7 +70,7 @@ public class ClassMainFrame extends JFrame {
         final DefaultTableModel tableModel = new DefaultTableModel(
                 InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(0).toObjectField(),
                 new String[]{
-                        "Student", "Status"
+                        "Last Name", "First Name", "Username", "CUID", "Status"
                 }
         ) {
             /**
@@ -79,7 +79,9 @@ public class ClassMainFrame extends JFrame {
             private static final long serialVersionUID = 1L;
             @SuppressWarnings("rawtypes")
             Class[] columnTypes = new Class[]{
-                    String.class, String.class
+                    String.class, String.class,
+                    String.class, String.class,
+                    String.class
             };
 
             public Class<?> getColumnClass(int columnIndex) {
@@ -89,7 +91,7 @@ public class ClassMainFrame extends JFrame {
             @Override
             public boolean isCellEditable(int row, int column) {
                 //first column false
-                if (column == 0) {
+                if (column < 4) {
                     return false;
                 } else {
                     return true;
@@ -174,8 +176,12 @@ public class ClassMainFrame extends JFrame {
                 String name = JOptionPane.showInputDialog(f, "Enter a new student's name!", "INSERT NAME HERE");
                 if (name != null) {
                     //table.addRow(new Object[] {name, false, false});
-                    InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex()).addStudent(name);
-                    ((DefaultTableModel) m_table.getModel()).fireTableDataChanged();
+                	
+                	//TODO
+                	//update table somehow
+                    InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).addStudent(name, name, name, name);
+                    tableModel.fireTableDataChanged();
+                    tableModel.fireTableRowsInserted(0, InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().size());
 //					whichClass.addStudent(name);
 //					table.fireTableDataChanged();
                 }
@@ -190,9 +196,9 @@ public class ClassMainFrame extends JFrame {
             public void mouseReleased(MouseEvent e) {
                 if (m_table.getSelectedRow() != -1) {
                     JFrame f = new JFrame();
-                    String name = JOptionPane.showInputDialog(f, "Edit Student's Name", InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).getName());
+                    String name = JOptionPane.showInputDialog(f, "Edit Student's Name", InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).getFirstname());
                     if (name != null) {
-                        InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).setName(name);
+                        InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).setFirstname(name);
                         //whichClass.getStudents().get(m_table.getSelectedRow()).setName(name);
                         //table.fireTableCellUpdated(m_table.getSelectedRow(), m_table.getSelectedColumn());
                     }
@@ -212,7 +218,7 @@ public class ClassMainFrame extends JFrame {
                     JFrame f = new JFrame();
                     int i = JOptionPane.showConfirmDialog(f, "Are you sure you want to delete " + m_list.getSelectedValue() + " ?", "", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
                     if (i == 0) {
-                        InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().remove(m_table.getSelectedRow());
+                        InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().remove(m_table.getSelectedRow());
 //						whichClass.getStudents().remove(m_table.getSelectedRow());
 //						table.fireTableDataChanged();
                     }
@@ -261,7 +267,11 @@ public class ClassMainFrame extends JFrame {
                 for (int i = 0; i < whichClass.getStudents().size(); i++) {
                     //TODO
                 	//BUG here with adding/deleting classes
-                	tableModel.addRow(new Object[]{InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getName(), InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getStatus()});
+                	tableModel.addRow(new Object[]{InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getFirstname(),
+                									InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getLastname(),
+                									InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getUsername(),
+                									InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getCUID(),
+                									InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getStatus()});
                 }
                 editButton.setEnabled(false);
                 deleteButton.setEnabled(false);

@@ -13,7 +13,7 @@ public class Class_t implements Serializable
 	private Vector<Student> m_students;
 	private String m_name;
 	
-	private String[] statuses = {"Absent", "Present", "Tardy"};
+	//private String[] statuses = {"Absent", "Present", "Tardy"};
 
 	public Class_t(String name)
 	{
@@ -37,17 +37,20 @@ public class Class_t implements Serializable
 		return m_students;
 	}
 	
-	public void addStudent(String name) {
-		m_students.add(new Student(name));
+	public void addStudent(String first, String last, String user, String cuid) {
+		m_students.add(new Student(first, last, user, cuid));
 	}
 	
 	public Object[][] toObjectField()
 	{
-		Object[][] ret = new Object[m_students.size()][3];
+		Object[][] ret = new Object[m_students.size()][5];
 		for (int i = 0; i < m_students.size(); i++)
 		{
-			ret[i][0] = m_students.get(i).getName();
-			ret[i][1] = m_students.get(i).getStatus();
+			ret[i][0] = m_students.get(i).getLastname();
+			ret[i][1] = m_students.get(i).getFirstname();
+			ret[i][2] = m_students.get(i).getUsername();
+			ret[i][3] = m_students.get(i).getCUID();
+			ret[i][4] = m_students.get(i).getStatus();
 		}
 		return ret;
 	}

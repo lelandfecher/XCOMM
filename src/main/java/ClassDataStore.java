@@ -116,10 +116,19 @@ public class ClassDataStore extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        //If first column, student name
+        //If first column, student last name
         if (columnIndex == 0)
-            return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getName();
-            //Otherwise return tardy or present or absent
+            return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getFirstname();
+        //If second column, student first name
+        else if (columnIndex == 1)
+            return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getLastname();
+        //If third column, student username
+        else if (columnIndex == 2)
+            return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getUsername();
+        //If fourth column, student cuid
+        else if (columnIndex == 3)
+            return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getCUID();
+        //Otherwise return tardy or present or absent
         else
             return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getStatus();
     }

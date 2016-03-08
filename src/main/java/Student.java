@@ -7,13 +7,19 @@ public class Student implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    private String m_name;
+    private String m_Lastname;
+    private String m_Firstname;
+    private String m_Username;
+    private String m_CUID;
 
     //Status = 0 for absent, 1 for present, and 2 for tardy
     private JComboBox<String> m_status;
 
-    public Student(String name) {
-        m_name = name;
+    public Student(String last, String first, String username, String CUID) {
+        m_Lastname = last;
+        m_Firstname = first;
+        m_Username = username;
+        m_CUID = CUID;
         m_status = new JComboBox<String>();
         m_status.addItem("Absent");
         m_status.addItem("Present");
@@ -22,12 +28,36 @@ public class Student implements Serializable {
     }
 
 
-    public String getName() {
-        return m_name;
+    public String getFirstname() {
+        return m_Firstname;
     }
 
-    public void setName(String name) {
-        m_name = name;
+    public void setFirstname(String first) {
+        m_Firstname = first;
+    }
+    
+    public String getLastname() {
+        return m_Lastname;
+    }
+
+    public void setLastname(String last) {
+        m_Lastname = last;
+    }
+    
+    public String getUsername() {
+        return m_Username;
+    }
+
+    public void setUsername(String name) {
+        m_Username = name;
+    }
+    
+    public String getCUID() {
+        return m_CUID;
+    }
+
+    public void setCUID(String cuid) {
+        m_CUID = cuid;
     }
 
     public Object getStatus() {
