@@ -41,6 +41,14 @@ public class Class_t implements Serializable
 		m_students.add(new Student(first, last, user, cuid));
 	}
 	
+	public void addStudent(Student s) {
+		m_students.add(s);
+	}
+	
+	public void setStudent(int index, Student s) {
+		m_students.set(index, s);
+	}
+	
 	public Object[][] toObjectField()
 	{
 		Object[][] ret = new Object[m_students.size()][5];

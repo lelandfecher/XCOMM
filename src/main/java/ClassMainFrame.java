@@ -1,7 +1,9 @@
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -118,6 +120,7 @@ public class ClassMainFrame extends JFrame {
                 System.exit(0);
             }
         });
+        exitMenuItem.setFont(Font.getFont(Font.MONOSPACED));
         fileMenu.add(exitMenuItem);
 
         //Add edit menu
@@ -170,19 +173,18 @@ public class ClassMainFrame extends JFrame {
 
         addButton.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
-                JFrame f = new JFrame();
-                String name = JOptionPane.showInputDialog(f, "Enter a new student's name!", "INSERT NAME HERE");
-                if (name != null) {
-                    //table.addRow(new Object[] {name, false, false});
-                	
-                	//TODO
-                	//update table somehow
-                    InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).addStudent(name, name, name, name);
-                    tableModel.fireTableDataChanged();
-                    tableModel.fireTableRowsInserted(0, InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().size());
+            	Frame frame = new Frame();
+            	StudentEditingDlg sed = new StudentEditingDlg(frame, "New Student", m_whichInstructor, m_list.getSelectedIndex());
+            	sed.setVisible(true);
+            	//TODO
+            	//update table somehow
+                
+                
+                tableModel.fireTableDataChanged();
+                tableModel.fireTableRowsInserted(0, InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().size());
 //					whichClass.addStudent(name);
 //					table.fireTableDataChanged();
-                }
+
             }
         });
         buttonPanel.add(addButton, BorderLayout.SOUTH);
@@ -193,14 +195,12 @@ public class ClassMainFrame extends JFrame {
         editButton.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
                 if (m_table.getSelectedRow() != -1) {
-                    JFrame f = new JFrame();
-                    String name = JOptionPane.showInputDialog(f, "Edit Student's Name", InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).getFirstname());
-                    if (name != null) {
-                        InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).setFirstname(name);
-                        //whichClass.getStudents().get(m_table.getSelectedRow()).setName(name);
-                        //table.fireTableCellUpdated(m_table.getSelectedRow(), m_table.getSelectedColumn());
-                    }
-                    //table.fireTableDataChanged();
+                	Frame frame = new Frame();
+                	StudentEditingDlg sed = new StudentEditingDlg(frame, "Edit", m_table, m_table.getSelectedRow(), m_whichInstructor, m_list.getSelectedIndex());
+                	sed.setVisible(true);
+                    //whichClass.getStudents().get(m_table.getSelectedRow()).setName(name);
+                    //table.fireTableCellUpdated(m_table.getSelectedRow(), m_table.getSelectedColumn());
+                //table.fireTableDataChanged();
 
                 }
             }
@@ -214,7 +214,7 @@ public class ClassMainFrame extends JFrame {
             public void mouseReleased(MouseEvent e) {
                 if (m_table.getSelectedRow() != -1 && m_table.getSelectedColumn() == 1) {
                     JFrame f = new JFrame();
-                    int i = JOptionPane.showConfirmDialog(f, "Are you sure you want to delete " + m_list.getSelectedValue() + " ?", "", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+                    int i = JOptionPane.showConfirmDialog(f, "Are you sure you want to delete " + InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).getFirstname() + " ?", "", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
                     if (i == 0) {
                         InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().remove(m_table.getSelectedRow());
 //						whichClass.getStudents().remove(m_table.getSelectedRow());
@@ -237,6 +237,22 @@ public class ClassMainFrame extends JFrame {
         splitPane.setDividerLocation(200);
 
         mainPanel.add(splitPane, BorderLayout.NORTH);
+        
+        Color orange = new Color(234, 106, 32);
+        Color purple = new Color(82, 45, 128);
+        mainPanel.setBackground(purple);
+        m_list.setForeground(purple);
+        m_table.setForeground(purple);
+        this.getContentPane().setBackground(purple);
+        buttonPanel.setBackground(purple);
+        
+        addButton.setBackground(orange);
+        addButton.setForeground(purple);
+        editButton.setBackground(orange);
+        editButton.setForeground(purple);
+        deleteButton.setBackground(orange);
+        deleteButton.setForeground(purple);
+
 
 
         m_table.addMouseListener(new MouseAdapter() {
