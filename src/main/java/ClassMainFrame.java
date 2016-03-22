@@ -179,9 +179,8 @@ public class ClassMainFrame extends JFrame {
             	//TODO
             	//update table somehow
                 
-                
-                tableModel.fireTableDataChanged();
-                tableModel.fireTableRowsInserted(0, InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().size());
+               // tableModel.fireTableDataChanged();
+               // tableModel.fireTableRowsInserted(0, InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().size());
 //					whichClass.addStudent(name);
 //					table.fireTableDataChanged();
 

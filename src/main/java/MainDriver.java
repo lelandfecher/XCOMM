@@ -3,6 +3,10 @@ import java.awt.*;
 
 public class MainDriver {
     public static void main(String[] args) {
+    	//CAT SPLASH SCREEN!!
+    	SplashScreen s = new SplashScreen();
+    	
+    	
         //First use Singleton to load classes from serialized file
         InstructorDataStore table = InstructorDataStore.getInstance();
 
@@ -17,7 +21,7 @@ public class MainDriver {
 
 
         //Now create main window of classes with list of classes just loaded
-        ClassMainFrame mainWindow = new ClassMainFrame("List of all Classes", table, whichInstructor);
+        ClassMainFrame mainWindow = new ClassMainFrame("CU·N·CLASS", table, whichInstructor);
 
         //Now set the visibility of the window to true
         mainWindow.setVisible(true);

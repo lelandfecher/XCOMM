@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 
 public class StudentEditingDlg extends JDialog{
@@ -26,6 +27,7 @@ public class StudentEditingDlg extends JDialog{
 	private JTextField usernameField;
 	private JTextField cuidField;
 
+	//For adding new student
 	public StudentEditingDlg(Frame frame, String title, final int whichInstructor, final int whichClass) {
 		//Call super constructor and set size
 		super(frame, title, true);
@@ -98,6 +100,7 @@ public class StudentEditingDlg extends JDialog{
 		add(southpanel, BorderLayout.SOUTH);
 	}
 
+	//For editing current student
 	public StudentEditingDlg(Frame frame, String title, final JTable table, final int rowIndex, final int whichInstructor, final int whichClass) {
 		super(frame, title, true);
 		this.setSize(200, 500);
@@ -143,7 +146,9 @@ public class StudentEditingDlg extends JDialog{
 				Student s = new Student(firstnameField.getText(), lastnameField.getText(),
 						usernameField.getText(), cuidField.getText());
 				InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(whichClass).setStudent(rowIndex, s);
-				((AbstractTableModel) table.getModel()).fireTableDataChanged();
+				//TODO update table
+				
+				//((DefaultTableModel) table.getModel()).fireTableRowsUpdated(0, table.getRowCount());
 				dispose();
 			}
 		});

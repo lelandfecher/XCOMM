@@ -59,7 +59,11 @@ public class LoginDlg extends JDialog {
             }
         });
         southpanel.add(signinButton, BorderLayout.WEST);
-
+        
+        final JButton signupButton = new JButton("Sign-Up");
+        //TODO signup functionality
+        signupButton.setEnabled(false);
+        southpanel.add(signupButton, BorderLayout.CENTER);
 
         final JButton cancelButton = new JButton("Cancel");    //create cancel Button
         cancelButton.addMouseListener(new MouseAdapter() {        //create actionListener for when it is pressed
@@ -68,7 +72,7 @@ public class LoginDlg extends JDialog {
                 System.exit(EXIT_ON_CLOSE);
             }
         });
-        southpanel.add(cancelButton, BorderLayout.CENTER);
+        southpanel.add(cancelButton, BorderLayout.EAST);
 
         northpanel.add(first);
         northpanel.add(second);
