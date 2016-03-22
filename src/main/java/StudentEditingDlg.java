@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.AbstractTableModel;
 
 
 public class StudentEditingDlg extends JDialog{
@@ -97,7 +98,7 @@ public class StudentEditingDlg extends JDialog{
 		add(southpanel, BorderLayout.SOUTH);
 	}
 
-	public StudentEditingDlg(Frame frame, String title, JTable table, final int rowIndex, final int whichInstructor, final int whichClass) {
+	public StudentEditingDlg(Frame frame, String title, final JTable table, final int rowIndex, final int whichInstructor, final int whichClass) {
 		super(frame, title, true);
 		this.setSize(200, 500);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -142,7 +143,7 @@ public class StudentEditingDlg extends JDialog{
 				Student s = new Student(firstnameField.getText(), lastnameField.getText(),
 						usernameField.getText(), cuidField.getText());
 				InstructorDataStore.getInstructors().get(whichInstructor).getClasses().get(whichClass).setStudent(rowIndex, s);
-				//TODO update table here?
+				((AbstractTableModel) table.getModel()).fireTableDataChanged();
 				dispose();
 			}
 		});

@@ -7,17 +7,17 @@ public class Student implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    private String m_Lastname;
     private String m_Firstname;
+    private String m_Lastname;
     private String m_Username;
     private String m_CUID;
 
     //Status = 0 for absent, 1 for present, and 2 for tardy
     private JComboBox<String> m_status;
 
-    public Student(String last, String first, String username, String CUID) {
-        m_Lastname = last;
+    public Student(String first, String last, String username, String CUID) {
         m_Firstname = first;
+        m_Lastname = last;
         m_Username = username;
         m_CUID = CUID;
         m_status = new JComboBox<String>();

@@ -212,7 +212,7 @@ public class ClassMainFrame extends JFrame {
 
         deleteButton.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
-                if (m_table.getSelectedRow() != -1 && m_table.getSelectedColumn() == 1) {
+                if (m_table.getSelectedRow() != -1) {
                     JFrame f = new JFrame();
                     int i = JOptionPane.showConfirmDialog(f, "Are you sure you want to delete " + InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).getFirstname() + " ?", "", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
                     if (i == 0) {
@@ -234,10 +234,12 @@ public class ClassMainFrame extends JFrame {
         JSplitPane splitPane = new JSplitPane();
         splitPane.setLeftComponent(leftScrollPane);
         splitPane.setRightComponent(rightScrollPane);
-        splitPane.setDividerLocation(200);
+        splitPane.setDividerLocation(150);
 
         mainPanel.add(splitPane, BorderLayout.NORTH);
         
+        
+        //Set colors
         Color orange = new Color(234, 106, 32);
         Color purple = new Color(82, 45, 128);
         mainPanel.setBackground(purple);
@@ -282,8 +284,8 @@ public class ClassMainFrame extends JFrame {
                 for (int i = 0; i < whichClass.getStudents().size(); i++) {
                     //TODO
                 	//BUG here with adding/deleting classes
-                	tableModel.addRow(new Object[]{InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getFirstname(),
-                									InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getLastname(),
+                	tableModel.addRow(new Object[]{InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getLastname(),
+                									InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getFirstname(),
                 									InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getUsername(),
                 									InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getCUID(),
                 									InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getStatus()});

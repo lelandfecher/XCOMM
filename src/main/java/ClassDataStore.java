@@ -16,7 +16,7 @@ public class ClassDataStore extends AbstractTableModel {
     private static Vector<Class_t> m_classes;
     //private static ArrayList<Student_t> m_students;
 
-    private String[] columnNames = {"Student", "Status"};
+    private String[] columnNames = {"Last Name", "First Name", "Username", "CUID", "Status"};
 
     //Constructor (Private for Singleton)
     private ClassDataStore() {
@@ -118,10 +118,10 @@ public class ClassDataStore extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         //If first column, student last name
         if (columnIndex == 0)
-            return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getFirstname();
+            return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getLastname();
         //If second column, student first name
         else if (columnIndex == 1)
-            return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getLastname();
+            return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getFirstname();
         //If third column, student username
         else if (columnIndex == 2)
             return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getUsername();
