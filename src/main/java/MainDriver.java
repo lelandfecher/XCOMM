@@ -12,16 +12,16 @@ public class MainDriver {
 
         //Then have Dialog Box prompting to sign in
         Frame f = new Frame();
-        LoginDlg ld = new LoginDlg(f, "Please Login/Sign-Up");
+        /*LoginDlg ld = new LoginDlg(f, "Please Login/Sign-Up");
 
         while (ld.signedIn() != true) {
             ld.setVisible(true);
         }
-        int whichInstructor = ld.getWhichInstructor();
+        int whichInstructor = ld.getWhichInstructor();*/
 
 
         //Now create main window of classes with list of classes just loaded
-        ClassMainFrame mainWindow = new ClassMainFrame("CU·N·CLASS", table, whichInstructor);
+        ClassMainFrame mainWindow = new ClassMainFrame("CUï¿½Nï¿½CLASS", table);
 
         //Now set the visibility of the window to true
         mainWindow.setVisible(true);
