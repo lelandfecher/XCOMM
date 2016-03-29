@@ -12,9 +12,6 @@ import java.nio.file.Paths;
 //TODO Update to work with updated data structures when changes are made
 public class CSVPort
 {
-	// First and last name are currently concatenated
-	// usernames and CUIDs are currently unused
-	// No method for using grades
 	static public Class_t importClass(Class_t classObj, String filePath) throws IOException
 	{
 		List<String> lines = Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8);
@@ -29,7 +26,6 @@ public class CSVPort
 		return classObj;
 	}
 	
-	// Does not currently create grades or output usernames or CUIDs due to missing fields in data structure
 	static public void exportClass(Class_t classObj, String filePath) throws FileNotFoundException
 	{
 		Vector<Student> students = classObj.getStudents();
