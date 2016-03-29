@@ -20,19 +20,18 @@ public class CSVPort
 		{
 			String[] cols = line.split(",");
 			Student stu = new Student(cols[1], cols[0], cols[2], cols[3]);
-			int score = Integer.parseInt(cols[6]); // can't do anything with this yet
 			classObj.addStudent(stu);
 		}
 		return classObj;
 	}
 	
-	static public void exportClass(Class_t classObj, String filePath) throws FileNotFoundException
+	static public void exportClass(Class_t classObj, String filePath, ScoringOptions opt) throws FileNotFoundException
 	{
 		Vector<Student> students = classObj.getStudents();
 		String fileText = "Last Name,First Name,Username,Student ID,Availability,Weighted Total [Total Pts: up to 0],Total [Total Pts: up to 100],Test 1 [Total Pts: 100]\n";
 		for (Student student : students)
 		{
-			String score = Integer.toString(100); // int score = Integer.toString(student.getScore());
+			String score = Integer.toString((int)student.getScore(opt)); 
 			
 			fileText += student.getLastname() + ","; //write last name column
 			fileText += student.getFirstname() + ","; // write first name column
