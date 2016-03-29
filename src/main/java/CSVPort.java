@@ -8,8 +8,6 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Vector;
 
 //TODO Update to work with updated data structures when changes are made
 public class CSVPort
@@ -24,7 +22,9 @@ public class CSVPort
 		for (String line : lines)
 		{
 			String[] cols = line.split(",");
-			//classObj.addStudent((cols[1] + " " + cols[0]).replaceAll("\"", ""));
+			Student stu = new Student(cols[1], cols[0], cols[2], cols[3]);
+			int score = Integer.parseInt(cols[6]); // can't do anything with this yet
+			classObj.addStudent(stu);
 		}
 		return classObj;
 	}
@@ -36,10 +36,14 @@ public class CSVPort
 		String fileText = "Last Name,First Name,Username,Student ID,Availability,Weighted Total [Total Pts: up to 0],Total [Total Pts: up to 100],Test 1 [Total Pts: 100]\n";
 		for (Student student : students)
 		{
-			//fileText += student.getName().split(" ")[1];
-			fileText += ",";
-			//fileText += student.getName().split(" ")[0];
-			fileText += ",NULL,NULL,Yes,,100,100\n";
+			String score = Integer.toString(100); // int score = Integer.toString(student.getScore());
+			
+			fileText += student.getLastname() + ","; //write last name column
+			fileText += student.getFirstname() + ","; // write first name column
+			fileText += student.getUsername() + ","; // write username column
+			fileText += student.getCUID() + ","; // write CUID column
+			fileText += "Yes,,"; // write unused columns
+			fileText += score + "," + score + "\n"; // write the score
 		}
 		
 		String[] lines = fileText.split("\n");
