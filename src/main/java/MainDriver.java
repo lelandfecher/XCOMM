@@ -24,7 +24,7 @@ public class MainDriver {
 
 
         //Now create main window of classes with list of classes just loaded
-        ClassMainFrame mainWindow = new ClassMainFrame("CU·N·CLASS", table, 0);
+        ClassMainFrame mainWindow = new ClassMainFrame("CU·N·CLASS", table);
 
         //Now set the visibility of the window to true
         mainWindow.setVisible(true);

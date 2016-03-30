@@ -5,7 +5,14 @@ package model;
  */
 public class Student {
     private String fullName;
-    private Attendance attendance;
+    private String username;
+    private String id;
+
+    public Student(String fullName, String username, String id) {
+        this.fullName = fullName;
+        this.username = username;
+        this.id = id;
+    }
 
     public String getFullName() {
         return fullName;
@@ -15,17 +22,19 @@ public class Student {
         this.fullName = fullName;
     }
 
-    public Attendance getAttendance() {
-        return attendance;
+    public String getUsername() {
+        return username;
     }
 
-    public void setAttendance(Attendance attendance) {
-        this.attendance = attendance;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    enum Attendance {
-        Present,
-        Tardy,
-        Absent
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

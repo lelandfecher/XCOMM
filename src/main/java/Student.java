@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Vector;
 
 public class Student implements Serializable {
     /**
@@ -12,21 +14,14 @@ public class Student implements Serializable {
     private String m_Username;
     private String m_CUID;
 
-    //Status = 0 for absent, 1 for present, and 2 for tardy
-    private JComboBox<String> m_status;
+    private Vector<ClassDate> m_dates;
 
     public Student(String first, String last, String username, String CUID) {
         m_Firstname = first;
         m_Lastname = last;
         m_Username = username;
         m_CUID = CUID;
-        m_status = new JComboBox<String>();
-        m_status.addItem("Absent");
-        m_status.addItem("Present");
-        m_status.addItem("Tardy");
-        m_status.setSelectedIndex(1);
     }
-
 
     public String getFirstname() {
         return m_Firstname;
@@ -60,24 +55,119 @@ public class Student implements Serializable {
         m_CUID = cuid;
     }
 
-    public Object getStatus() {
-        return m_status.getSelectedItem();
+    public Status getStatus(Date date) {
+        ClassDate cd = new ClassDate(date, Status.NULL);
+        for (ClassDate d : m_dates)
+        	if (date == d.getDate())
+        	{
+        		cd = d;
+        		break;
+        	}
+        return cd.getStatus();
     }
 
-    public void setStatus(int status) {
-        m_status.setSelectedIndex(status);
+    public void setStatus(Date date, Status status) {
+    	ClassDate cd = new ClassDate(date, Status.NULL);
+        for (ClassDate d : m_dates)
+        	if (date == d.getDate())
+        	{
+        		cd = d;
+        		break;
+        	}
+        cd.setStatus(status);
     }
 
-    public void setPresent() {
-        m_status.setSelectedIndex(1);
+    public void setPresent(Date date) {
+    	ClassDate cd = new ClassDate(date, Status.NULL);
+        for (ClassDate d : m_dates)
+        	if (date == d.getDate())
+        	{
+        		cd = d;
+        		break;
+        	}
+        cd.setStatus(Status.Present);
     }
 
-    public void setTardy() {
-        m_status.setSelectedIndex(2);
+    public void setTardy(Date date) {
+    	ClassDate cd = new ClassDate(date, Status.NULL);
+        for (ClassDate d : m_dates)
+        	if (date == d.getDate())
+        	{
+        		cd = d;
+        		break;
+        	}
+        cd.setStatus(Status.Tardy);
     }
 
-    public void setAbsent() {
-        m_status.setSelectedIndex(0);
+    public void setAbsent(Date date) {
+    	ClassDate cd = new ClassDate(date, Status.NULL);
+        for (ClassDate d : m_dates)
+        	if (date == d.getDate())
+        	{
+        		cd = d;
+        		break;
+        	}
+        cd.setStatus(Status.Absent);
+    }
+    
+    public void addDate(Date date, Status status) {
+        for (ClassDate d : m_dates)
+        	if (date == d.getDate())
+        	{
+	        	UnsupportedOperationException exception = new UnsupportedOperationException("The passed in date is already in record");
+	        	throw exception;
+        	}
+    	m_dates.add(new ClassDate(date, status));
+    }
+    
+    public double getScore(ScoringOptions opt)
+    {
+    	double score = 100;
+    	int presentCount = 0;
+    	int tardyCount = 0;
+    	int absentCount = 0;
+    	Method method = opt.getScoringMethod();
+    	
+    	for (ClassDate cd : m_dates)
+    	{
+    		if (cd.getStatus() == Status.Present)
+    			++presentCount;
+    		else if (cd.getStatus() == Status.Absent)
+    			++tardyCount;
+    		else if (cd.getStatus() == Status.Tardy)
+    			++absentCount;
+    	}
+    	
+    	if (opt.getNumGraceAbsences() > absentCount)
+		{
+			presentCount += absentCount;
+			absentCount = 0;
+		}
+		else
+		{
+			presentCount += opt.getNumGraceAbsences();
+			absentCount -= opt.getNumGraceAbsences();
+		}
+    	
+    	if (opt.getNumGraceTardies() > tardyCount)
+    	{
+    		presentCount += tardyCount;
+    		tardyCount = 0;
+    	}
+    	else
+    	{
+    		presentCount += opt.getNumGraceTardies();
+    		absentCount -= opt.getNumGraceTardies();
+    	}
+    	
+    	if (method == Method.CountDown)
+    		score = opt.getMax() - (opt.getPointsPerAbsent() * absentCount) - (opt.getPointsPerTardy() * tardyCount);  		
+    	else if (method == Method.CountUp)
+	    	score = (opt.getPointsPerPresent() * presentCount) + ((opt.getTardyWorthPercent() / 100) * tardyCount);
+    	else if (method == Method.Average)
+    		score = (double)(presentCount + ((opt.getTardyWorthPercent() / 100) * tardyCount)) / (presentCount + tardyCount + absentCount) * 100;
+    	
+    	return score;
     }
 }
 

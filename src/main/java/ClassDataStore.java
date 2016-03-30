@@ -1,5 +1,7 @@
 import javax.swing.table.AbstractTableModel;
+
 import java.io.*;
+import java.util.Date;
 import java.util.Vector;
 
 public class ClassDataStore extends AbstractTableModel {
@@ -116,6 +118,8 @@ public class ClassDataStore extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+    	Date date = new Date();
+    	
         //If first column, student last name
         if (columnIndex == 0)
             return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getLastname();
@@ -130,7 +134,7 @@ public class ClassDataStore extends AbstractTableModel {
             return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getCUID();
         //Otherwise return tardy or present or absent
         else
-            return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getStatus();
+            return m_classes.get(rowIndex).getStudents().elementAt(columnIndex).getStatus(date);
     }
 
     public void delClass(int selectedRow) {

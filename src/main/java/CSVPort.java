@@ -8,15 +8,10 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Vector;
 
 //TODO Update to work with updated data structures when changes are made
 public class CSVPort
 {
-	// First and last name are currently concatenated
-	// usernames and CUIDs are currently unused
-	// No method for using grades
 	static public Class_t importClass(Class_t classObj, String filePath) throws IOException
 	{
 		List<String> lines = Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8);
@@ -24,22 +19,26 @@ public class CSVPort
 		for (String line : lines)
 		{
 			String[] cols = line.split(",");
-			//classObj.addStudent((cols[1] + " " + cols[0]).replaceAll("\"", ""));
+			Student stu = new Student(cols[1], cols[0], cols[2], cols[3]);
+			classObj.addStudent(stu);
 		}
 		return classObj;
 	}
 	
-	// Does not currently create grades or output usernames or CUIDs due to missing fields in data structure
-	static public void exportClass(Class_t classObj, String filePath) throws FileNotFoundException
+	static public void exportClass(Class_t classObj, String filePath, ScoringOptions opt) throws FileNotFoundException
 	{
 		Vector<Student> students = classObj.getStudents();
 		String fileText = "Last Name,First Name,Username,Student ID,Availability,Weighted Total [Total Pts: up to 0],Total [Total Pts: up to 100],Test 1 [Total Pts: 100]\n";
 		for (Student student : students)
 		{
-			//fileText += student.getName().split(" ")[1];
-			fileText += ",";
-			//fileText += student.getName().split(" ")[0];
-			fileText += ",NULL,NULL,Yes,,100,100\n";
+			String score = Integer.toString((int)student.getScore(opt)); 
+			
+			fileText += student.getLastname() + ","; //write last name column
+			fileText += student.getFirstname() + ","; // write first name column
+			fileText += student.getUsername() + ","; // write username column
+			fileText += student.getCUID() + ","; // write CUID column
+			fileText += "Yes,,"; // write unused columns
+			fileText += score + "," + score + "\n"; // write the score
 		}
 		
 		String[] lines = fileText.split("\n");

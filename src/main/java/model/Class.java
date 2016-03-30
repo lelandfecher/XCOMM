@@ -10,9 +10,11 @@ public class Class {
     private transient Teacher teacher;
     private int teacherID;
     private List<Student> students;
+    private List<Day> days;
 
     public Class() {
         this.students = new ArrayList<>();
+        this.days = new ArrayList<>();
     }
 
     public Teacher getTeacher() {
@@ -28,7 +30,7 @@ public class Class {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
+    public List<Day> getDays() {
+        return days;
     }
 }

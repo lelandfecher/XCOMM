@@ -1,6 +1,7 @@
 
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Vector;
 
 public class Class_t implements Serializable
@@ -51,6 +52,8 @@ public class Class_t implements Serializable
 	
 	public Object[][] toObjectField()
 	{
+		Date date = new Date();
+		
 		Object[][] ret = new Object[m_students.size()][5];
 		for (int i = 0; i < m_students.size(); i++)
 		{
@@ -58,7 +61,7 @@ public class Class_t implements Serializable
 			ret[i][1] = m_students.get(i).getFirstname();
 			ret[i][2] = m_students.get(i).getUsername();
 			ret[i][3] = m_students.get(i).getCUID();
-			ret[i][4] = m_students.get(i).getStatus();
+			ret[i][4] = m_students.get(i).getStatus(date);
 		}
 		return ret;
 	}
