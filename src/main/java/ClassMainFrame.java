@@ -48,7 +48,10 @@ public class ClassMainFrame extends JFrame {
         try {
             InstructorDataStore.loadInstructors("instructors.ser");
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+//            JFrame f = new JFrame();
+//            JOptionPane jop = new JOptionPane("Welcome to CUNCLASS!", 0, 0, null, null, "Please enter your name!");
+//            jop.setVisible(true);
         }
 
         //Create two panels, one from list/table, one for buttons
@@ -120,7 +123,6 @@ public class ClassMainFrame extends JFrame {
                 System.exit(0);
             }
         });
-        exitMenuItem.setFont(Font.getFont(Font.MONOSPACED));
         fileMenu.add(exitMenuItem);
 
         //Add edit menu

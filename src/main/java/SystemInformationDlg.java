@@ -18,7 +18,7 @@ public class SystemInformationDlg extends JDialog {
         JPanel panel = new JPanel();
         JLabel jl = new JLabel();    //create label to add to Panel with information about GUI
         jl.setFont(new Font("Serif", Font.PLAIN, 14));
-        jl.setText("<html>Created by: xCOMM Team <br> Leland Fecher, Molly Sullivan, James Hollowell, Zak Parks, Jack Bernard, and Austin Fitzpatrick <br> For: Dr. Linville<br>Instructor: Leland Fecher");
+        jl.setText("<html>Created by xCOMM Team: <br>Molly Sullivan, James Hollowell, Zak Parks, Jack Bernard, and Austin Fitzpatrick <br> For: Dr. Linville<br>Instructor: Leland Fecher");
         add(jl);
 
         panel.add(jl);
