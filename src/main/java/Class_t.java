@@ -65,4 +65,9 @@ public class Class_t implements Serializable
 		}
 		return ret;
 	}
+
+	@Override
+	public String toString() {
+		return m_name;
+	}
 }

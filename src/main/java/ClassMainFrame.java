@@ -2,32 +2,21 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Vector;
+import java.util.List;
 
 
 public class ClassMainFrame extends JFrame {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
     //	//Variable instances
-//	private JPanel mainPanel;
-//	private JPanel buttonPanel;
-//	//private DefaultTableModel model;
-//	private JList<Class_t> classes = new JList<Class_t>();
-    private int m_whichInstructor;
-    private Instructor defaultInstructor;
+
     private Class_t whichClass;
 
 
-    public ClassMainFrame(String title, final InstructorDataStore list) {
+    public ClassMainFrame(String title) {
         //Call super constructor to set up JFrame
         super(title);
 
@@ -35,9 +24,6 @@ public class ClassMainFrame extends JFrame {
 
         //Set window size
         this.setSize(new Dimension(840, 589));
-
-//        m_whichInstructor = whichInstructor;
-        m_whichInstructor = 0;
 
 
         //Set Icon image
@@ -49,12 +35,9 @@ public class ClassMainFrame extends JFrame {
 
         //Load file of classes
         try {
-            InstructorDataStore.loadInstructors("instructors.ser");
+            ClassDataStore.getInstance().Load();
         } catch (Exception e) {
-            //e.printStackTrace();
-//            JFrame f = new JFrame();
-//            JOptionPane jop = new JOptionPane("Welcome to CUNCLASS!", 0, 0, null, null, "Please enter your name!");
-//            jop.setVisible(true);
+            e.printStackTrace();
         }
 
         //Create two panels, one from list/table, one for buttons
@@ -67,23 +50,18 @@ public class ClassMainFrame extends JFrame {
 
 
         //Set up list model
-        //final DefaultListModel<Object> listModel = new DefaultListModel<Object>();
-        final JList<Object> m_list = new JList<Object>(list);
+        final JList<Object> m_list = new JList<>(ClassDataStore.getInstance().getClasses().toArray());
 
 
         final JTable m_table = new JTable();
 
         //Set up table model
+        Object[][] objField = ClassDataStore.getInstance().getClasses().size() > 0 ? ClassDataStore.getInstance().getClasses().get(0).toObjectField() : new Object[][]{new Object[]{"", "", "", "", ""}};
         final DefaultTableModel tableModel = new DefaultTableModel(
-                InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(0).toObjectField(),
+                objField,
                 new String[]{
                         "Last Name", "First Name", "Username", "CUID", "Status"
-                }
-        ) {
-            /**
-             *
-             */
-            private static final long serialVersionUID = 1L;
+                }) {
             @SuppressWarnings("rawtypes")
             Class[] columnTypes = new Class[]{
                     String.class, String.class,
@@ -120,7 +98,7 @@ public class ClassMainFrame extends JFrame {
         exitMenuItem.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent arg0) {
                 try {
-                    InstructorDataStore.saveInstructors(InstructorDataStore.getInstructors(), "instructors.ser");
+                    ClassDataStore.getInstance().Save();
                 } catch (IOException ioe) {
                     ioe.printStackTrace();
                 }
@@ -139,7 +117,7 @@ public class ClassMainFrame extends JFrame {
             public void mouseReleased(MouseEvent arg0) {
                 String name = JOptionPane.showInputDialog("Class name: ");
                 if (name != null) {
-                    InstructorDataStore.getInstructors().get(m_whichInstructor).addClass(name);
+                    ClassDataStore.getInstance().getClasses().add(new Class_t(name));
                     update_list(m_list);
                 }
             }
@@ -150,7 +128,7 @@ public class ClassMainFrame extends JFrame {
         removeClassMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                InstructorDataStore.getInstructors().get(m_whichInstructor).removeClass(m_list.getSelectedIndex());
+                ClassDataStore.getInstance().getClasses().remove(m_list.getSelectedIndex());
                 update_list(m_list);
             }
         });
@@ -180,7 +158,7 @@ public class ClassMainFrame extends JFrame {
         addButton.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
                 Frame frame = new Frame();
-                StudentEditingDlg sed = new StudentEditingDlg(frame, "New Student", m_whichInstructor, m_list.getSelectedIndex());
+                StudentEditingDlg sed = new StudentEditingDlg(frame, "New Student", m_table, m_list.getSelectedIndex(), true);
                 sed.setVisible(true);
                 //TODO
                 //update table somehow
@@ -193,15 +171,14 @@ public class ClassMainFrame extends JFrame {
             }
         });
         buttonPanel.add(addButton, BorderLayout.SOUTH);
-        if (InstructorDataStore.getInstructors().size() == 0
-                || m_list.getSelectedIndex() == -1)
+        if (m_list.getSelectedIndex() == -1)
             addButton.setEnabled(false);
 
         editButton.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
                 if (m_table.getSelectedRow() != -1) {
                     Frame frame = new Frame();
-                    StudentEditingDlg sed = new StudentEditingDlg(frame, "Edit", m_table, m_table.getSelectedRow(), m_whichInstructor, m_list.getSelectedIndex());
+                    StudentEditingDlg sed = new StudentEditingDlg(frame, "Edit", m_table, m_table.getSelectedRow(), m_list.getSelectedIndex());
                     sed.setVisible(true);
                     //whichClass.getStudents().get(m_table.getSelectedRow()).setName(name);
                     //table.fireTableCellUpdated(m_table.getSelectedRow(), m_table.getSelectedColumn());
@@ -211,17 +188,16 @@ public class ClassMainFrame extends JFrame {
             }
         });
         buttonPanel.add(editButton, BorderLayout.SOUTH);
-        if (InstructorDataStore.getInstructors().size() == 0
-                || m_table.getSelectedRow() == -1)
+        if (m_table.getSelectedRow() == -1)
             editButton.setEnabled(false);
 
         deleteButton.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
                 if (m_table.getSelectedRow() != -1) {
                     JFrame f = new JFrame();
-                    int i = JOptionPane.showConfirmDialog(f, "Are you sure you want to delete " + InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).getFirstname() + " ?", "", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+                    int i = JOptionPane.showConfirmDialog(f, "Are you sure you want to delete " + ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).getFirstname() + " ?", "", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
                     if (i == 0) {
-                        InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().remove(m_table.getSelectedRow());
+                        ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().remove(m_table.getSelectedRow());
 //						whichClass.getStudents().remove(m_table.getSelectedRow());
 //						table.fireTableDataChanged();
                     }
@@ -229,8 +205,7 @@ public class ClassMainFrame extends JFrame {
             }
         });
         buttonPanel.add(deleteButton, BorderLayout.SOUTH);
-        if (InstructorDataStore.getInstructors().size() == 0
-                || m_table.getSelectedRow() == -1)
+        if (m_table.getSelectedRow() == -1)
             deleteButton.setEnabled(false);
 
         JScrollPane leftScrollPane = new JScrollPane(m_list);
@@ -278,9 +253,9 @@ public class ClassMainFrame extends JFrame {
 
                 //Check to see if some class is selected (will be -1 if a class has just been deleted)
                 if (m_list.getSelectedIndex() == -1) {
-                    whichClass = InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(0);
+                    whichClass = ClassDataStore.getInstance().getClasses().get(0);
                 } else {
-                    whichClass = InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex());
+                    whichClass = ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex());
                 }
                 while (tableModel.getRowCount() != 0) {
                     tableModel.removeRow(0);
@@ -289,11 +264,10 @@ public class ClassMainFrame extends JFrame {
                 for (int i = 0; i < whichClass.getStudents().size(); i++) {
                     //TODO
                     //BUG here with adding/deleting classes
-                    tableModel.addRow(new Object[]{InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getLastname(),
-                            InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getFirstname(),
-                            InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getUsername(),
-                            InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getCUID(),
-                            InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses().get(m_list.getSelectedIndex()).getStudents().get(i).getStatus(date)});
+                    Student student = ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().get(i);
+                    tableModel.addRow(new Object[]{student.getLastname(), student.getFirstname(), student.getUsername(),
+                            student.getCUID(),
+                            student.getStatus(date)});
                 }
                 editButton.setEnabled(false);
                 deleteButton.setEnabled(false);
@@ -305,7 +279,7 @@ public class ClassMainFrame extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 try {
-                    InstructorDataStore.saveInstructors(InstructorDataStore.getInstructors(), "instructors.ser");
+                    ClassDataStore.getInstance().Save();
                 } catch (IOException ioe) {
                     ioe.printStackTrace();
                 }
@@ -314,15 +288,11 @@ public class ClassMainFrame extends JFrame {
     }
 
     void update_list(JList<Object> m_list) {
-        Vector<Class_t> classes = InstructorDataStore.getInstructors().get(m_whichInstructor).getClasses();
+        List<Class_t> classes = ClassDataStore.getInstance().getClasses();
         final String[] class_names = new String[classes.size()];
         for (int i = 0; i < classes.size(); ++i)
             class_names[i] = classes.get(i).getName();
         m_list.setModel(new AbstractListModel<Object>() {
-            /**
-             *
-             */
-            private static final long serialVersionUID = 1L;
             String[] values = class_names;
 
             public int getSize() {

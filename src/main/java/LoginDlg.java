@@ -1,15 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Arrays;
-import java.util.Vector;
 
 public class LoginDlg extends JDialog {
     /**
      *
      */
     private static final long serialVersionUID = 1L;
-    private Vector<Instructor> m_instructors;
+    //    private Vector<Instructor> m_instructors;
     private JTextField name;
     private JPasswordField pwd;
     private boolean correctCombo;
@@ -20,7 +18,7 @@ public class LoginDlg extends JDialog {
         super(f, title, true);
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         correctCombo = false;
-        m_instructors = InstructorDataStore.getInstructors();
+//        m_instructors = InstructorDataStore.getInstructors();
 
         this.setSize(300, 150);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -97,16 +95,16 @@ public class LoginDlg extends JDialog {
     }
 
     private void trySignin() {
-        JPanel panel = new JPanel();
-        for (int i = 0; i < m_instructors.size(); i++) {
-            if (name.getText().contentEquals(m_instructors.get(i).getName()) && Arrays.equals(pwd.getPassword(), m_instructors.get(i).getPassword().toCharArray())) {
-                JOptionPane.showMessageDialog(panel, "Welcome " + name.getText() + "!", null, JOptionPane.PLAIN_MESSAGE/*, new ImageIcon("SORS.png")*/);
-                correctCombo = true;
-                whichInstructor = i;
-                this.dispose();
-            } else if (i == m_instructors.size() - 1) {
-                JOptionPane.showMessageDialog(panel, "Username/Password Combination Not Found", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-        }
+//        JPanel panel = new JPanel();
+//        for (int i = 0; i < m_instructors.size(); i++) {
+//            if (name.getText().contentEquals(m_instructors.get(i).getName()) && Arrays.equals(pwd.getPassword(), m_instructors.get(i).getPassword().toCharArray())) {
+//                JOptionPane.showMessageDialog(panel, "Welcome " + name.getText() + "!", null, JOptionPane.PLAIN_MESSAGE/*, new ImageIcon("SORS.png")*/);
+//                correctCombo = true;
+//                whichInstructor = i;
+//                this.dispose();
+//            } else if (i == m_instructors.size() - 1) {
+//                JOptionPane.showMessageDialog(panel, "Username/Password Combination Not Found", "ERROR", JOptionPane.ERROR_MESSAGE);
+//            }
+//        }
     }
 }
