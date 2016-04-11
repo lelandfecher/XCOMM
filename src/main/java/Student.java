@@ -130,9 +130,9 @@ public class Student implements Serializable {
             if (cd.getStatus() == Status.Present)
                 ++presentCount;
             else if (cd.getStatus() == Status.Absent)
-                ++tardyCount;
-            else if (cd.getStatus() == Status.Tardy)
                 ++absentCount;
+            else if (cd.getStatus() == Status.Tardy)
+                ++tardyCount;
         }
 
         if (opt.getNumGraceAbsences() > absentCount) {
@@ -159,6 +159,28 @@ public class Student implements Serializable {
             score = (double) (presentCount + ((opt.getTardyWorthPercent() / 100) * tardyCount)) / (presentCount + tardyCount + absentCount) * 100;
 
         return score;
+    }
+    
+    public int getNumAbsences() {
+    	int absentCount = 0;
+    	
+        for (ClassDate cd : m_dates) {
+            if (cd.getStatus() == Status.Absent)
+                ++absentCount;
+        }
+        
+        return absentCount;
+    }
+    
+    public int getNumTardies() {
+    	int tardyCount = 0;
+    	
+        for (ClassDate cd : m_dates) {
+            if (cd.getStatus() == Status.Absent)
+                ++tardyCount;
+        }
+        
+        return tardyCount;
     }
 }
 

@@ -8,9 +8,20 @@
           "m_Username": "jthollo",
           "m_CUID": "",
           "m_dates": []
+        },
+        {
+          "m_Firstname": "Fitzpatrick",
+          "m_Lastname": "Austin",
+          "m_Username": "afitzpa",
+          "m_CUID": "109238101",
+          "m_dates": []
         }
       ],
       "m_name": "XComm"
+    },
+    {
+      "m_students": [],
+      "m_name": "COMM 1500-001"
     }
   ]
 }
