@@ -1,9 +1,12 @@
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -108,6 +111,59 @@ public class ClassMainFrame extends JFrame {
             }
         });
         fileMenu.add(exitMenuItem);
+        
+        JMenuItem importClassMenuItem = new JMenuItem("Import Class");
+        importClassMenuItem.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseReleased(MouseEvent arg0) {
+        		JFileChooser fc = new JFileChooser();
+        		int status = fc.showOpenDialog(ClassMainFrame.this);
+        		if (status == JFileChooser.APPROVE_OPTION)
+        		{
+        			String name = JOptionPane.showInputDialog("Class name: ");
+        			if (name == null)
+        				name = fc.getSelectedFile().getPath().split(".")[0];
+        			Class_t cls = new Class_t(name);
+        			try
+					{
+						cls = CSVPort.importClass(cls, fc.getSelectedFile().getPath());
+						ClassDataStore.getInstance().getClasses().add(cls);
+						update_list(m_list);
+					} 
+        			catch (IOException e)
+					{
+						JOptionPane.showMessageDialog(ClassMainFrame.this, "Unable to open file!");
+					}
+        		}
+        	}
+        });
+        fileMenu.add(importClassMenuItem);
+        
+        JMenuItem exportClassMenuItem = new JMenuItem("Export Class");
+        exportClassMenuItem.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseReleased(MouseEvent arg0) {
+        		JFileChooser fc = new JFileChooser();
+        		FileNameExtensionFilter filter = new FileNameExtensionFilter(".csv", "csv");
+        		fc.setFileFilter(filter);
+        		int status = fc.showSaveDialog(ClassMainFrame.this);
+        		if (status == JFileChooser.APPROVE_OPTION)
+        		{
+        			String file = fc.getSelectedFile().getPath();
+        			if (!file.endsWith(".csv"))
+        				file += ".csv";
+        			ScoringOptions opt = new ScoringOptions();
+        			try
+					{
+						CSVPort.exportClass(ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()), file, opt);
+					} catch (FileNotFoundException e)
+					{
+						JOptionPane.showMessageDialog(ClassMainFrame.this, "Unable to save file!");
+					}
+        		}
+        	}
+        });
+        fileMenu.add(exportClassMenuItem);
 
         //Add edit menu
         JMenu editMenu = new JMenu("Edit");

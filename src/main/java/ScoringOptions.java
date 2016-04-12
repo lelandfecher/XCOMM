@@ -11,6 +11,18 @@ public class ScoringOptions
 	private int m_graceTardy; // The number of tardies that will not be factored into the score
 	private Method m_method; // The method use for determining the score - see enumerator Method
 	
+	public ScoringOptions()
+	{
+		m_max = 100;
+		m_presentPoints = 0;
+		m_absentPoints = 0;
+		m_tardyPoints = 0;
+		m_tardyRatio = 0;
+		m_graceAbsence = 0;
+		m_graceTardy = 0;
+		m_method = Method.CountDown;
+	}
+	
 	public double getMax()
 	{
 		return m_max;
