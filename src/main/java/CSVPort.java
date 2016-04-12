@@ -18,7 +18,7 @@ public class CSVPort
 		lines.remove(0);
 		for (String line : lines)
 		{
-			String[] cols = line.split(",");
+			String[] cols = line.replaceAll("\"", "").split(",");
 			Student stu = new Student(cols[1], cols[0], cols[2], cols[3]);
 			classObj.addStudent(stu);
 		}
@@ -28,17 +28,17 @@ public class CSVPort
 	static public void exportClass(Class_t classObj, String filePath, ScoringOptions opt) throws FileNotFoundException
 	{
 		Vector<Student> students = classObj.getStudents();
-		String fileText = "Last Name,First Name,Username,Student ID,Availability,Weighted Total [Total Pts: up to 0],Total [Total Pts: up to 100],Test 1 [Total Pts: 100]\n";
+		String fileText = "\"Last Name\",\"First Name\",\"Username\",\"Student ID\",\"Availability\",\"Weighted Total [Total Pts: up to 0]\",\"Total [Total Pts: up to 100]\",\"Test 1 [Total Pts: 100]\"\n";
 		for (Student student : students)
 		{
 			String score = Integer.toString((int)student.getScore(opt)); 
 			
-			fileText += student.getLastname() + ","; //write last name column
-			fileText += student.getFirstname() + ","; // write first name column
-			fileText += student.getUsername() + ","; // write username column
-			fileText += student.getCUID() + ","; // write CUID column
-			fileText += "Yes,,"; // write unused columns
-			fileText += score + "," + score + "\n"; // write the score
+			fileText += "\"" + student.getLastname() + "\"" + ","; //write last name column
+			fileText += "\"" + student.getFirstname() + "\"" + ","; // write first name column
+			fileText += "\"" + student.getUsername() + "\"" + ","; // write username column
+			fileText += "\"" + student.getCUID() + "\"" + ","; // write CUID column
+			fileText += "\"Yes\",\"\","; // write unused columns
+			fileText += "\"" + score + "\"" + "," + "\"" + score + "\"" + "\n"; // write the score
 		}
 		
 		String[] lines = fileText.split("\n");

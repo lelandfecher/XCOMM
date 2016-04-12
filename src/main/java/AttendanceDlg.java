@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -25,9 +26,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class AttendanceDlg extends JDialog {
 
-	public AttendanceDlg(Frame f, String title, int whichClass) {
+	private Date m_date;
+	
+	public AttendanceDlg(Frame f, String title, int whichClass, Date date) {
 		
 		super(f, title, true);
+		
+		m_date = date;
 		
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -53,11 +58,19 @@ public class AttendanceDlg extends JDialog {
 
         final JTable m_table = new JTable();
       
-        Date date = new Date();
         //Set up table model
         Object[][] objField = ClassDataStore.getInstance().getClasses().get(whichClass).toAttendanceObjectField(date);
+        Object[][] objF = new Object[objField.length][5];
+        for (int i = 0; i < objField.length; ++i)
+        {
+        	objF[i][0] = objField[i][0];
+        	objF[i][1] = objField[i][1];
+        	objF[i][2] = objField[i][2];
+        	objF[i][3] = objField[i][3];
+        	objF[i][4] = "Present";
+        }
         final DefaultTableModel tableModel = new DefaultTableModel(
-                objField,
+                objF,
                 new String[]{
                         "Last Name", "First Name", "Username", "CUID", "Status"
                 }) {
@@ -65,19 +78,24 @@ public class AttendanceDlg extends JDialog {
             Class[] columnTypes = new Class[]{
                     String.class, String.class,
                     String.class, String.class,
-                    JComboBox.class
+                    String.class
             };
-
+            
             public Class<?> getColumnClass(int columnIndex) {
                 return columnTypes[columnIndex];
             }
 
             @Override
             public boolean isCellEditable(int row, int column) {
-            	return false;
+            	return column == 4 ? true : false;
             }
         };
         m_table.setModel(tableModel);
+        JComboBox cb = new JComboBox();
+        cb.addItem("Present");
+        cb.addItem("Absent");
+        cb.addItem("Tardy");
+        m_table.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(cb));
         
         //Create menuBar and set it as this frame's menuBar
         JMenuBar menuBar = new JMenuBar();
@@ -123,7 +141,23 @@ public class AttendanceDlg extends JDialog {
         
         takeAttendanceBtn.addMouseListener(new MouseAdapter() {
         	public void mouseReleased(MouseEvent e) {
-        		//TODO submit attendance
+        		String stat;
+        		for (int i = 0; i < m_table.getRowCount(); ++i)
+        		{
+        			ClassDate d;
+        			stat = (String)m_table.getModel().getValueAt(i, 4);
+        			if (stat == "Present")
+        				d = new ClassDate(m_date, Status.Present);
+        			else if (stat == "Absent")
+        				d = new ClassDate(m_date, Status.Absent);
+        			else
+        				d = new ClassDate(m_date, Status.Tardy);
+        			
+        			//TODO fix NullPointerException in commented line below
+        			//ClassDataStore.getInstance().getClasses().get(i).addDate(d);
+        		}
+        		
+        		dispose();
         	}
         });
         buttonPanel.add(takeAttendanceBtn, BorderLayout.SOUTH);
