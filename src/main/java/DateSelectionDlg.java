@@ -22,11 +22,15 @@ public class DateSelectionDlg extends JDialog {
 	//private String[] lessDays = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30" };
 	//private String[] febDays = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28" };
 	private String[] years = { "2016", "2017" };
+	
+	private Date m_date;
 
 	public DateSelectionDlg(Frame frame, String title, Date date, final int whichClass) {
 		
 		super(frame, title, true);
 		this.setSize(new Dimension(300, 150));
+		
+		m_date = date;
 		
 		//Center on screen
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -62,8 +66,8 @@ public class DateSelectionDlg extends JDialog {
                 //TODO
             	//Open up new dialog box for taking attendance with current class on current day
             	Frame f = new Frame();
-            	AttendanceDlg attendanceDlg = new AttendanceDlg(f, "Let's Take Attendance!", whichClass);
-                attendanceDlg.setVisible(true);
+            	AttendanceDlg attendanceDlg = new AttendanceDlg(f, "Let's Take Attendance!", whichClass, m_date);
+            	attendanceDlg.setVisible(true);
                 
             	dispose();
             }
