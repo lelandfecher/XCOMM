@@ -51,6 +51,7 @@ public class ClassMainFrame extends JFrame {
 
         //Set up list model
         final JList<Object> m_list = new JList<>(ClassDataStore.getInstance().getClasses().toArray());
+        m_list.setSelectedIndex(0);
 
 
         final JTable m_table = new JTable();
