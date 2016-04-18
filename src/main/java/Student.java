@@ -176,7 +176,7 @@ public class Student implements Serializable {
     	int tardyCount = 0;
     	
         for (ClassDate cd : m_dates) {
-            if (cd.getStatus() == Status.Absent)
+            if (cd.getStatus() == Status.Tardy)
                 ++tardyCount;
         }
         

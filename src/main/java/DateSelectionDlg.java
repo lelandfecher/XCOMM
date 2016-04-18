@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -29,6 +30,7 @@ public class DateSelectionDlg extends JDialog {
 		
 		super(frame, title, true);
 		this.setSize(new Dimension(300, 150));
+        this.setIconImage(new ImageIcon("tigerpaw.jpg").getImage());
 		
 		m_date = date;
 		
@@ -45,13 +47,13 @@ public class DateSelectionDlg extends JDialog {
         
         JLabel month = new JLabel("Month", JLabel.TRAILING);
         one.add(month, BorderLayout.WEST);
-        JComboBox monthDropDown = new JComboBox(months);
+        final JComboBox monthDropDown = new JComboBox(months);
         monthDropDown.setSelectedIndex(date.getMonth());
         two.add(monthDropDown,BorderLayout.WEST);
         
         JLabel day = new JLabel("               Day", JLabel.TRAILING);
         one.add(day, BorderLayout.CENTER);
-        JComboBox dayDropDown = new JComboBox(days);
+        final JComboBox dayDropDown = new JComboBox(days);
         dayDropDown.setSelectedIndex(date.getDate() - 1);
         two.add(dayDropDown,BorderLayout.CENTER);
         
@@ -63,8 +65,11 @@ public class DateSelectionDlg extends JDialog {
         final JButton confirmButton = new JButton("Take Attendance!");    //create save Button
         confirmButton.addMouseListener(new MouseAdapter() {        //create actionListener for when it is pressed
             public void mouseClicked(MouseEvent arg0) {
-                //TODO
+            	
             	//Open up new dialog box for taking attendance with current class on current day
+            	m_date.setMonth(monthDropDown.getSelectedIndex());
+            	m_date.setDate(dayDropDown.getSelectedIndex() + 1);
+            	
             	Frame f = new Frame();
             	AttendanceDlg attendanceDlg = new AttendanceDlg(f, "Let's Take Attendance!", whichClass, m_date);
             	attendanceDlg.setVisible(true);

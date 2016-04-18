@@ -3,25 +3,51 @@
     {
       "m_students": [
         {
-          "m_Firstname": "James",
-          "m_Lastname": "Hollowell",
-          "m_Username": "jthollo",
-          "m_CUID": "",
-          "m_dates": []
+          "m_Firstname": "1",
+          "m_Lastname": "1",
+          "m_Username": "1",
+          "m_CUID": "1",
+          "m_dates": [
+            {
+              "m_date": "Apr 18, 2016 1:46:52 PM",
+              "m_status": "Absent"
+            },
+            {
+              "m_date": "Apr 19, 2016 1:47:20 PM",
+              "m_status": "Present"
+            },
+            {
+              "m_date": "Apr 18, 2016 1:48:38 PM",
+              "m_status": "Present"
+            }
+          ]
         },
         {
-          "m_Firstname": "Fitzpatrick",
-          "m_Lastname": "Austin",
-          "m_Username": "afitzpa",
-          "m_CUID": "109238101",
-          "m_dates": []
+          "m_Firstname": "2",
+          "m_Lastname": "2",
+          "m_Username": "2",
+          "m_CUID": "2",
+          "m_dates": [
+            {
+              "m_date": "Apr 18, 2016 1:46:52 PM",
+              "m_status": "Present"
+            },
+            {
+              "m_date": "Apr 19, 2016 1:47:20 PM",
+              "m_status": "Tardy"
+            },
+            {
+              "m_date": "Apr 18, 2016 1:48:38 PM",
+              "m_status": "Present"
+            }
+          ]
         }
       ],
-      "m_name": "XComm"
+      "m_name": "COMM 1500-001"
     },
     {
       "m_students": [],
-      "m_name": "COMM 1500-001"
+      "m_name": "XComm"
     }
   ]
 }

@@ -30,7 +30,7 @@ public class ClassMainFrame extends JFrame {
 
 
         //Set Icon image
-        //this.setIconImage(new ImageIcon("path/to/image.png").getImage());
+        this.setIconImage(new ImageIcon("tigerpaw.jpg").getImage());
 
         //Center it on screen by finding screen dimensions
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -98,20 +98,6 @@ public class ClassMainFrame extends JFrame {
         //Add file menu
         JMenu fileMenu = new JMenu("File");
         menuBar.add(fileMenu);
-
-        //Add exit item on file menu to exit program and save data
-        JMenuItem exitMenuItem = new JMenuItem("Exit", KeyEvent.VK_E);
-        exitMenuItem.addMouseListener(new MouseAdapter() {
-            public void mouseReleased(MouseEvent arg0) {
-                try {
-                    ClassDataStore.getInstance().Save();
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                }
-                System.exit(0);
-            }
-        });
-        fileMenu.add(exitMenuItem);
         
         JMenuItem importClassMenuItem = new JMenuItem("Import Class");
         importClassMenuItem.addMouseListener(new MouseAdapter() {
@@ -165,6 +151,22 @@ public class ClassMainFrame extends JFrame {
         	}
         });
         fileMenu.add(exportClassMenuItem);
+        
+      //Add exit item on file menu to exit program and save data
+        JMenuItem exitMenuItem = new JMenuItem("Exit", KeyEvent.VK_E);
+        exitMenuItem.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent arg0) {
+                try {
+                    ClassDataStore.getInstance().Save();
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
+                System.exit(0);
+            }
+        });
+        fileMenu.add(exitMenuItem);
+        
+        
 
         //Add edit menu
         JMenu editMenu = new JMenu("Edit");
@@ -174,7 +176,8 @@ public class ClassMainFrame extends JFrame {
         addClassMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent arg0) {
-                String name = JOptionPane.showInputDialog("Class name: ");
+            	Frame f = new Frame();
+                String name = JOptionPane.showInputDialog(f, "Class name:", "Add New Class", JOptionPane.QUESTION_MESSAGE);
                 if (name != null) {
                     ClassDataStore.getInstance().getClasses().add(new Class_t(name));
                     update_list(m_list);
@@ -212,16 +215,16 @@ public class ClassMainFrame extends JFrame {
 
         final JButton takeAttendanceBtn = new JButton("Take Attendance");
         final JButton checkAttendanceBtn = new JButton("Check Attendance");        
-        final JButton addButton = new JButton("Add");
-        final JButton editButton = new JButton("Edit");
-        final JButton deleteButton = new JButton("Delete");
+        final JButton addButton = new JButton("Add Student");
+        final JButton editButton = new JButton("Edit Student");
+        final JButton deleteButton = new JButton("Delete Student");
         
         takeAttendanceBtn.addMouseListener(new MouseAdapter() {
         	public void mouseReleased(MouseEvent e) {
         		Frame f = new Frame();
 
 	        	//if a class is selected
-        		if (m_list.getSelectedIndex() != -1) {
+        		if (m_list.getSelectedIndex() != -1 && !ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().isEmpty()) {
         			//Ask for date then take attendance
 	        		Date date = new Date();
 	        		DateSelectionDlg dsd = new DateSelectionDlg(f, "Please Enter Date", date, m_list.getSelectedIndex());
@@ -276,8 +279,8 @@ public class ClassMainFrame extends JFrame {
                     int i = JOptionPane.showConfirmDialog(f, "Are you sure you want to delete " + ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).getFirstname() + " ?", "", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
                     if (i == 0) {
                         ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().remove(m_table.getSelectedRow());
-//						whichClass.getStudents().remove(m_table.getSelectedRow());
-//						table.fireTableDataChanged();
+                        DefaultTableModel model = (DefaultTableModel) m_table.getModel();
+                        model.removeRow(m_table.getSelectedRow());
                     }
                 }
             }
@@ -302,8 +305,9 @@ public class ClassMainFrame extends JFrame {
         Color purple = new Color(82, 45, 128);
         Color white = new Color(255,255,255);
         mainPanel.setBackground(purple);
-        m_list.setForeground(purple);
+        m_list.setForeground(white);
         m_table.setForeground(purple);
+        m_list.setBackground(orange);
         this.getContentPane().setBackground(purple);
         buttonPanel.setBackground(purple);
 
@@ -332,7 +336,6 @@ public class ClassMainFrame extends JFrame {
         m_list.addListSelectionListener(new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent arg0) {
-                //skip = true;
 
                 //Check to see if some class is selected (will be -1 if a class has just been deleted)
                 if (m_list.getSelectedIndex() == -1) {
@@ -345,10 +348,9 @@ public class ClassMainFrame extends JFrame {
                 while (tableModel.getRowCount() != 0) {
                     tableModel.removeRow(0);
                 }
-//                Date date = new Date();
+
                 for (int i = 0; i < whichClass.getStudents().size(); i++) {
-                    //TODO
-                    //BUG here with adding/deleting classes
+
                     Student student = ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().get(i);
                     tableModel.addRow(new Object[] {
                     		student.getLastname(), 
@@ -362,7 +364,11 @@ public class ClassMainFrame extends JFrame {
                 editButton.setEnabled(false);
                 deleteButton.setEnabled(false);
                 addButton.setEnabled(true);
-                //skip = false;
+
+                if(ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().isEmpty()) {
+                	takeAttendanceBtn.setEnabled(false);
+                	checkAttendanceBtn.setEnabled(false);
+                }
             }
         });
 

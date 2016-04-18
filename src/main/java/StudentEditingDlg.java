@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,6 +22,7 @@ public class StudentEditingDlg extends JDialog {
         //Call super constructor and set size
         super(frame, title, true);
         this.setSize(new Dimension(200, 400));
+        this.setIconImage(new ImageIcon("tigerpaw.jpg").getImage());
 
         //Center on screen
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -66,8 +68,7 @@ public class StudentEditingDlg extends JDialog {
                         usernameField.getText(), cuidField.getText());
                 ClassDataStore.getInstance().getClasses().get(whichClass).addStudent(s);
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.addRow(new Object[]{s.getFirstname(), s.getLastname(), s.getUsername(), s.getCUID()});
-                //TODO update table here?
+                model.addRow(new Object[]{s.getFirstname(), s.getLastname(), s.getUsername(), s.getCUID(), s.getNumAbsences(), s.getNumTardies()});
                 dispose();
             }
         });
@@ -89,12 +90,36 @@ public class StudentEditingDlg extends JDialog {
         add(northpanel);
 
         add(southpanel, BorderLayout.SOUTH);
+        
+        
+      //Set colors
+        Color orange = new Color(234, 106, 32);
+        Color purple = new Color(82, 45, 128);
+        Color white = new Color(255,255,255);
+        
+        firstname.setForeground(white);
+        lastname.setForeground(white);
+        username.setForeground(white);
+        cuid.setForeground(white);
+        
+        first.setBackground(orange);
+        second.setBackground(orange);
+        third.setBackground(orange);
+        fourth.setBackground(orange);
+        northpanel.setBackground(orange);
+        southpanel.setBackground(orange);
+        saveButton.setBackground(purple);
+        saveButton.setForeground(white);
+        cancelButton.setBackground(purple);
+        cancelButton.setForeground(white);
     }
 
     //For editing current student
     public StudentEditingDlg(Frame frame, String title, final JTable table, final int rowIndex, final int whichClass) {
         super(frame, title, true);
-        this.setSize(200, 500);
+        this.setSize(200, 400);
+        this.setIconImage(new ImageIcon("tigerpaw.jpg").getImage());
+
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
@@ -137,9 +162,10 @@ public class StudentEditingDlg extends JDialog {
                 Student s = new Student(firstnameField.getText(), lastnameField.getText(),
                         usernameField.getText(), cuidField.getText());
                 ClassDataStore.getInstance().getClasses().get(whichClass).setStudent(rowIndex, s);
-                //TODO update table
-
-                //((DefaultTableModel) table.getModel()).fireTableRowsUpdated(0, table.getRowCount());
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                model.fireTableDataChanged();
+                model.removeRow(rowIndex);
+                model.insertRow(rowIndex, new Object[]{s.getFirstname(), s.getLastname(), s.getUsername(), s.getCUID(), s.getNumAbsences(), s.getNumTardies()});
                 dispose();
             }
         });
@@ -160,6 +186,27 @@ public class StudentEditingDlg extends JDialog {
 
         add(northpanel);
         add(southpanel, BorderLayout.SOUTH);
+        
+      //Set colors
+        Color orange = new Color(234, 106, 32);
+        Color purple = new Color(82, 45, 128);
+        Color white = new Color(255,255,255);
+        
+        firstname.setForeground(white);
+        lastname.setForeground(white);
+        username.setForeground(white);
+        cuid.setForeground(white);
+        
+        first.setBackground(orange);
+        second.setBackground(orange);
+        third.setBackground(orange);
+        fourth.setBackground(orange);
+        northpanel.setBackground(orange);
+        southpanel.setBackground(orange);
+        saveButton.setBackground(purple);
+        saveButton.setForeground(white);
+        cancelButton.setBackground(purple);
+        cancelButton.setForeground(white);
     }
 
 }

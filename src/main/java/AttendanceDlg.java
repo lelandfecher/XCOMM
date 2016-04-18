@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import javax.swing.DefaultCellEditor;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -28,9 +29,9 @@ public class AttendanceDlg extends JDialog {
 
 	private Date m_date;
 	
-	public AttendanceDlg(Frame f, String title, int whichClass, Date date) {
+	public AttendanceDlg(Frame f, String title, final int whichClass, Date date) {
 		
-		super(f, title, true);
+		super(f, title + " Date: " + date.toString(), true);
 		
 		m_date = date;
 		
@@ -41,7 +42,7 @@ public class AttendanceDlg extends JDialog {
 
 
         //Set Icon image
-        //this.setIconImage(new ImageIcon("path/to/image.png").getImage());
+        this.setIconImage(new ImageIcon("tigerpaw.jpg").getImage());
 
         //Center it on screen by finding screen dimensions
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -153,8 +154,7 @@ public class AttendanceDlg extends JDialog {
         			else
         				d = new ClassDate(m_date, Status.Tardy);
         			
-        			//TODO fix NullPointerException in commented line below
-        			//ClassDataStore.getInstance().getClasses().get(i).addDate(d);
+        			ClassDataStore.getInstance().getClasses().get(whichClass).getStudents().get(i).addDate(d.getDate(), d.getStatus());
         		}
         		
         		dispose();
