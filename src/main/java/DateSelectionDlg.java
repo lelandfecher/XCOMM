@@ -1,19 +1,8 @@
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 
 public class DateSelectionDlg extends JDialog {
@@ -26,9 +15,9 @@ public class DateSelectionDlg extends JDialog {
 	
 	private Date m_date;
 
-	public DateSelectionDlg(Frame frame, String title, Date date, final int whichClass) {
-		
-		super(frame, title, true);
+    public DateSelectionDlg(final Frame frame, String title, Date date, final int whichClass) {
+
+        super(frame, title, true);
 		this.setSize(new Dimension(300, 150));
         this.setIconImage(new ImageIcon("tigerpaw.jpg").getImage());
 		
@@ -69,10 +58,10 @@ public class DateSelectionDlg extends JDialog {
             	//Open up new dialog box for taking attendance with current class on current day
             	m_date.setMonth(monthDropDown.getSelectedIndex());
             	m_date.setDate(dayDropDown.getSelectedIndex() + 1);
-            	
-            	Frame f = new Frame();
-            	AttendanceDlg attendanceDlg = new AttendanceDlg(f, "Let's Take Attendance!", whichClass, m_date);
-            	attendanceDlg.setVisible(true);
+
+
+                AttendanceDlg attendanceDlg = new AttendanceDlg(frame, "Let's Take Attendance!", whichClass, m_date);
+                attendanceDlg.setVisible(true);
                 
             	dispose();
             }

@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -61,9 +62,10 @@ public class Student implements Serializable {
     }
 
     public Status getStatus(Date date) {
+        fixTime(date);
         ClassDate cd = new ClassDate(date, Status.NULL);
         for (ClassDate d : m_dates)
-            if (date == d.getDate()) {
+            if (date.equals(d.getDate())) {
                 cd = d;
                 break;
             }
@@ -71,9 +73,10 @@ public class Student implements Serializable {
     }
 
     public void setStatus(Date date, Status status) {
+        fixTime(date);
         ClassDate cd = new ClassDate(date, Status.NULL);
         for (ClassDate d : m_dates)
-            if (date == d.getDate()) {
+            if (date.equals(d.getDate())) {
                 cd = d;
                 break;
             }
@@ -81,9 +84,10 @@ public class Student implements Serializable {
     }
 
     public void setPresent(Date date) {
+        fixTime(date);
         ClassDate cd = new ClassDate(date, Status.NULL);
         for (ClassDate d : m_dates)
-            if (date == d.getDate()) {
+            if (date.equals(d.getDate())) {
                 cd = d;
                 break;
             }
@@ -91,9 +95,10 @@ public class Student implements Serializable {
     }
 
     public void setTardy(Date date) {
+        fixTime(date);
         ClassDate cd = new ClassDate(date, Status.NULL);
         for (ClassDate d : m_dates)
-            if (date == d.getDate()) {
+            if (date.equals(d.getDate())) {
                 cd = d;
                 break;
             }
@@ -101,9 +106,10 @@ public class Student implements Serializable {
     }
 
     public void setAbsent(Date date) {
+        fixTime(date);
         ClassDate cd = new ClassDate(date, Status.NULL);
         for (ClassDate d : m_dates)
-            if (date == d.getDate()) {
+            if (date.equals(d.getDate())) {
                 cd = d;
                 break;
             }
@@ -111,11 +117,13 @@ public class Student implements Serializable {
     }
 
     public void addDate(Date date, Status status) {
+        fixTime(date);
         for (ClassDate d : m_dates)
-            if (date == d.getDate()) {
-                UnsupportedOperationException exception = new UnsupportedOperationException("The passed in date is already in record");
-                throw exception;
+            if (date.equals(d.getDate())) {
+                d.setStatus(status);
+                return;
             }
+
         m_dates.add(new ClassDate(date, status));
     }
 
@@ -160,27 +168,37 @@ public class Student implements Serializable {
 
         return score;
     }
-    
+
     public int getNumAbsences() {
-    	int absentCount = 0;
-    	
+        int absentCount = 0;
+
         for (ClassDate cd : m_dates) {
             if (cd.getStatus() == Status.Absent)
                 ++absentCount;
         }
-        
+
         return absentCount;
     }
-    
+
     public int getNumTardies() {
-    	int tardyCount = 0;
-    	
+        int tardyCount = 0;
+
         for (ClassDate cd : m_dates) {
             if (cd.getStatus() == Status.Tardy)
                 ++tardyCount;
         }
-        
+
         return tardyCount;
+    }
+
+    private void fixTime(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        date.setTime(calendar.getTimeInMillis());
     }
 }
 

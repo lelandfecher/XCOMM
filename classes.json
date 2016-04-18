@@ -9,16 +9,12 @@
           "m_CUID": "1",
           "m_dates": [
             {
-              "m_date": "Apr 18, 2016 1:46:52 PM",
+              "m_date": "Apr 18, 2016 12:00:00 PM",
               "m_status": "Absent"
             },
             {
-              "m_date": "Apr 19, 2016 1:47:20 PM",
-              "m_status": "Present"
-            },
-            {
-              "m_date": "Apr 18, 2016 1:48:38 PM",
-              "m_status": "Present"
+              "m_date": "Apr 17, 2016 12:00:00 PM",
+              "m_status": "Tardy"
             }
           ]
         },
@@ -29,15 +25,11 @@
           "m_CUID": "2",
           "m_dates": [
             {
-              "m_date": "Apr 18, 2016 1:46:52 PM",
-              "m_status": "Present"
-            },
-            {
-              "m_date": "Apr 19, 2016 1:47:20 PM",
+              "m_date": "Apr 18, 2016 12:00:00 PM",
               "m_status": "Tardy"
             },
             {
-              "m_date": "Apr 18, 2016 1:48:38 PM",
+              "m_date": "Apr 17, 2016 12:00:00 PM",
               "m_status": "Present"
             }
           ]

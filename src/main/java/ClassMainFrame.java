@@ -1,7 +1,6 @@
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -16,12 +15,16 @@ public class ClassMainFrame extends JFrame {
 
     //	//Variable instances
 
+    public final JTable m_table;
     private Class_t whichClass;
 
 
     public ClassMainFrame(String title) {
         //Call super constructor to set up JFrame
         super(title);
+
+        //For use in context where that is not the frame
+        final ClassMainFrame that = this;
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,7 +60,7 @@ public class ClassMainFrame extends JFrame {
         m_list.setSelectedIndex(0);
 
 
-        final JTable m_table = new JTable();
+        m_table = new JTable();
 
         //Set up table model
         Object[][] objField = ClassDataStore.getInstance().getClasses().size() > 0 ? ClassDataStore.getInstance().getClasses().get(0).toObjectField() : new Object[][]{new Object[]{"", "", "", "", ""}};
@@ -213,22 +216,21 @@ public class ClassMainFrame extends JFrame {
         this.setJMenuBar(menuBar);
 
 
-        final JButton takeAttendanceBtn = new JButton("Take Attendance");
-        final JButton checkAttendanceBtn = new JButton("Check Attendance");        
+        final JButton takeAttendanceBtn = new JButton("Take/Check Attendance");
+//        final JButton checkAttendanceBtn = new JButton("Check Attendance");
         final JButton addButton = new JButton("Add Student");
         final JButton editButton = new JButton("Edit Student");
         final JButton deleteButton = new JButton("Delete Student");
         
         takeAttendanceBtn.addMouseListener(new MouseAdapter() {
         	public void mouseReleased(MouseEvent e) {
-        		Frame f = new Frame();
 
 	        	//if a class is selected
         		if (m_list.getSelectedIndex() != -1 && !ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().isEmpty()) {
         			//Ask for date then take attendance
 	        		Date date = new Date();
-	        		DateSelectionDlg dsd = new DateSelectionDlg(f, "Please Enter Date", date, m_list.getSelectedIndex());
-	        		dsd.setVisible(true);
+                    DateSelectionDlg dsd = new DateSelectionDlg(that, "Please Enter Date", date, m_list.getSelectedIndex());
+                    dsd.setVisible(true);
         		}
         	}
 
@@ -236,17 +238,17 @@ public class ClassMainFrame extends JFrame {
         buttonPanel.add(takeAttendanceBtn, BorderLayout.SOUTH);
         if (m_list.getSelectedIndex() == -1)
             takeAttendanceBtn.setEnabled(false);
-        
-        checkAttendanceBtn.addMouseListener(new MouseAdapter() {
-        	public void mouseReleased(MouseEvent e) {
-        		//TODO
-        		//Ask for date
-        		//Show attendance for each student in selected Class for specific date
-        	}
-        });
-        buttonPanel.add(checkAttendanceBtn, BorderLayout.SOUTH);
-        if (m_list.getSelectedIndex() == -1)
-        	checkAttendanceBtn.setEnabled(false);
+
+//        checkAttendanceBtn.addMouseListener(new MouseAdapter() {
+//        	public void mouseReleased(MouseEvent e) {
+//        		//TODO
+//        		//Ask for date
+//        		//Show attendance for each student in selected Class for specific date
+//        	}
+//        });
+//        buttonPanel.add(checkAttendanceBtn, BorderLayout.SOUTH);
+//        if (m_list.getSelectedIndex() == -1)
+//        	checkAttendanceBtn.setEnabled(false);
 
         addButton.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
@@ -313,8 +315,8 @@ public class ClassMainFrame extends JFrame {
 
         takeAttendanceBtn.setBackground(orange);
         takeAttendanceBtn.setForeground(white);
-        checkAttendanceBtn.setBackground(orange);
-        checkAttendanceBtn.setForeground(white);
+//        checkAttendanceBtn.setBackground(orange);
+//        checkAttendanceBtn.setForeground(white);
         addButton.setBackground(orange);
         addButton.setForeground(white);
         editButton.setBackground(orange);
@@ -343,7 +345,7 @@ public class ClassMainFrame extends JFrame {
                 } else {
                     whichClass = ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex());
                     takeAttendanceBtn.setEnabled(true);
-                    checkAttendanceBtn.setEnabled(true);
+//                    checkAttendanceBtn.setEnabled(true);
                 }
                 while (tableModel.getRowCount() != 0) {
                     tableModel.removeRow(0);
@@ -367,7 +369,7 @@ public class ClassMainFrame extends JFrame {
 
                 if(ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().isEmpty()) {
                 	takeAttendanceBtn.setEnabled(false);
-                	checkAttendanceBtn.setEnabled(false);
+//                	checkAttendanceBtn.setEnabled(false);
                 }
             }
         });

@@ -1,11 +1,8 @@
-
-
+import javax.swing.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
-
-import javax.swing.JComboBox;
 
 public class Class_t implements Serializable
 {
@@ -95,8 +92,18 @@ public class Class_t implements Serializable
 			ret[i][2] = m_students.get(i).getUsername();
 			ret[i][3] = m_students.get(i).getCUID();
 			JComboBox comboBox = new JComboBox(statuses);
-			comboBox.setSelectedIndex(0);
-			//m_students.get(i).getStatus(date);
+			Status status = m_students.get(i).getStatus(date);
+			switch (status) {
+				case Present:
+					comboBox.setSelectedIndex(0);
+					break;
+				case Tardy:
+					comboBox.setSelectedIndex(1);
+					break;
+				case Absent:
+					comboBox.setSelectedIndex(2);
+					break;
+			}
 			ret[i][4] = comboBox;
 		}
 		return ret;

@@ -5,7 +5,7 @@ apply plugin: 'idea'
 apply plugin: 'jacoco'
 
 
-mainClassName = "Menu"
+mainClassName = "MainDriver"
 
 // Ensure Java 1.7 compatibility
 sourceCompatibility = 1.7
