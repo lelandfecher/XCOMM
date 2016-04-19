@@ -3,33 +3,37 @@
     {
       "m_students": [
         {
-          "m_Firstname": "1",
-          "m_Lastname": "1",
-          "m_Username": "1",
+          "m_Firstname": "James",
+          "m_Lastname": "Hollowell",
+          "m_Username": "jthollo",
           "m_CUID": "1",
           "m_dates": [
             {
               "m_date": "Apr 18, 2016 12:00:00 PM",
               "m_status": "Absent"
-            },
-            {
-              "m_date": "Apr 17, 2016 12:00:00 PM",
-              "m_status": "Tardy"
             }
           ]
         },
         {
-          "m_Firstname": "2",
-          "m_Lastname": "2",
+          "m_Firstname": "Austin",
+          "m_Lastname": "Fitzpatrick",
           "m_Username": "2",
           "m_CUID": "2",
           "m_dates": [
             {
               "m_date": "Apr 18, 2016 12:00:00 PM",
-              "m_status": "Tardy"
-            },
+              "m_status": "Present"
+            }
+          ]
+        },
+        {
+          "m_Firstname": "Molly",
+          "m_Lastname": "Sullivan",
+          "m_Username": "mollyyyyy",
+          "m_CUID": "",
+          "m_dates": [
             {
-              "m_date": "Apr 17, 2016 12:00:00 PM",
+              "m_date": "Apr 18, 2016 12:00:00 PM",
               "m_status": "Present"
             }
           ]

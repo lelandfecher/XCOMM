@@ -1,6 +1,5 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -67,8 +66,7 @@ public class StudentEditingDlg extends JDialog {
                 Student s = new Student(firstnameField.getText(), lastnameField.getText(),
                         usernameField.getText(), cuidField.getText());
                 ClassDataStore.getInstance().getClasses().get(whichClass).addStudent(s);
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.addRow(new Object[]{s.getFirstname(), s.getLastname(), s.getUsername(), s.getCUID(), s.getNumAbsences(), s.getNumTardies()});
+                ((StudentTableModel) table.getModel()).update();
                 dispose();
             }
         });
@@ -162,10 +160,7 @@ public class StudentEditingDlg extends JDialog {
                 Student s = new Student(firstnameField.getText(), lastnameField.getText(),
                         usernameField.getText(), cuidField.getText());
                 ClassDataStore.getInstance().getClasses().get(whichClass).setStudent(rowIndex, s);
-                DefaultTableModel model = (DefaultTableModel) table.getModel();
-                model.fireTableDataChanged();
-                model.removeRow(rowIndex);
-                model.insertRow(rowIndex, new Object[]{s.getFirstname(), s.getLastname(), s.getUsername(), s.getCUID(), s.getNumAbsences(), s.getNumTardies()});
+                ((DefaultTableModel) table.getModel()).fireTableDataChanged();
                 dispose();
             }
         });

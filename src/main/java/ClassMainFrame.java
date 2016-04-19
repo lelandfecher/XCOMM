@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
@@ -16,6 +15,7 @@ public class ClassMainFrame extends JFrame {
     //	//Variable instances
 
     public final JTable m_table;
+    private final StudentTableModel tableModel = new StudentTableModel();
     private Class_t whichClass;
 
 
@@ -63,36 +63,38 @@ public class ClassMainFrame extends JFrame {
         m_table = new JTable();
 
         //Set up table model
-        Object[][] objField = ClassDataStore.getInstance().getClasses().size() > 0 ? ClassDataStore.getInstance().getClasses().get(0).toObjectField() : new Object[][]{new Object[]{"", "", "", "", ""}};
-        final DefaultTableModel tableModel = new DefaultTableModel(
-                objField,
-                new String[]{
-                        "Last Name", "First Name", "Username", "CUID", "Num Absences", "Num Tardies"
-                }) {
-            @SuppressWarnings("rawtypes")
-            Class[] columnTypes = new Class[]{
-                    String.class, String.class,
-                    String.class, String.class,
-                    String.class, String.class
-            };
+//        Object[][] objField = ClassDataStore.getInstance().getClasses().size() > 0 ? ClassDataStore.getInstance().getClasses().get(0).toObjectField() : new Object[][]{new Object[]{"", "", "", "", ""}};
+//        final DefaultTableModel tableModel = new DefaultTableModel(
+//                objField,
+//                new String[]{
+//                        "Last Name", "First Name", "Username", "CUID", "Num Absences", "Num Tardies"
+//                }) {
+//            @SuppressWarnings("rawtypes")
+//            Class[] columnTypes = new Class[]{
+//                    String.class, String.class,
+//                    String.class, String.class,
+//                    String.class, String.class
+//            };
+//
+//            public Class<?> getColumnClass(int columnIndex) {
+//                return columnTypes[columnIndex];
+//            }
+//
+//            @Override
+//            public boolean isCellEditable(int row, int column) {
+//                //first column false
+////                if (column < 4) {
+////                    return false;
+////                } else {
+////                    return true;
+////                }
+//            	//I think all cells shouldn't be editable
+//            	return false;
+//            }
+//        };
 
-            public Class<?> getColumnClass(int columnIndex) {
-                return columnTypes[columnIndex];
-            }
-
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                //first column false
-//                if (column < 4) {
-//                    return false;
-//                } else {
-//                    return true;
-//                }
-            	//I think all cells shouldn't be editable
-            	return false;
-            }
-        };
         m_table.setModel(tableModel);
+        tableModel.setClass(0);
 
         //Create menuBar and set it as this frame's menuBar
         JMenuBar menuBar = new JMenuBar();
@@ -281,8 +283,7 @@ public class ClassMainFrame extends JFrame {
                     int i = JOptionPane.showConfirmDialog(f, "Are you sure you want to delete " + ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().get(m_table.getSelectedRow()).getFirstname() + " ?", "", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
                     if (i == 0) {
                         ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().remove(m_table.getSelectedRow());
-                        DefaultTableModel model = (DefaultTableModel) m_table.getModel();
-                        model.removeRow(m_table.getSelectedRow());
+                        tableModel.setClass(m_list.getSelectedIndex());
                     }
                 }
             }
@@ -347,22 +348,9 @@ public class ClassMainFrame extends JFrame {
                     takeAttendanceBtn.setEnabled(true);
 //                    checkAttendanceBtn.setEnabled(true);
                 }
-                while (tableModel.getRowCount() != 0) {
-                    tableModel.removeRow(0);
-                }
 
-                for (int i = 0; i < whichClass.getStudents().size(); i++) {
+                tableModel.setClass(m_list.getSelectedIndex());
 
-                    Student student = ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().get(i);
-                    tableModel.addRow(new Object[] {
-                    		student.getLastname(), 
-                    		student.getFirstname(), 
-                    		student.getUsername(),
-                            student.getCUID(),
-                            student.getNumAbsences(),
-                            student.getNumTardies()
-                            });
-                }
                 editButton.setEnabled(false);
                 deleteButton.setEnabled(false);
                 addButton.setEnabled(true);
