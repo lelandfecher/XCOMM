@@ -23,7 +23,7 @@ public class ClassMainFrame extends JFrame {
     public ClassMainFrame(String title) {
         //Call super constructor to set up JFrame
         super(title);
-        
+
         so = new ScoringOptions();
 
         //For use in context where that is not the frame
@@ -132,28 +132,6 @@ public class ClassMainFrame extends JFrame {
 
         JMenuItem exportClassMenuItem = new JMenuItem("Export Class");
         exportClassMenuItem.addMouseListener(new MouseAdapter() {
-<<<<<<< HEAD
-        	@Override
-        	public void mouseReleased(MouseEvent arg0) {
-        		JFileChooser fc = new JFileChooser();
-        		FileNameExtensionFilter filter = new FileNameExtensionFilter(".csv", "csv");
-        		fc.setFileFilter(filter);
-        		int status = fc.showSaveDialog(ClassMainFrame.this);
-        		if (status == JFileChooser.APPROVE_OPTION)
-        		{
-        			String file = fc.getSelectedFile().getPath();
-        			if (!file.endsWith(".csv"))
-        				file += ".csv";
-        			try
-					{
-						CSVPort.exportClass(ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()), file, so);
-					} catch (FileNotFoundException e)
-					{
-						JOptionPane.showMessageDialog(ClassMainFrame.this, "Unable to save file!");
-					}
-        		}
-        	}
-=======
             @Override
             public void mouseReleased(MouseEvent arg0) {
                 JFileChooser fc = new JFileChooser();
@@ -172,7 +150,6 @@ public class ClassMainFrame extends JFrame {
                     }
                 }
             }
->>>>>>> 0bd6cd161b98610e5b7bd99ec3bc41fbffb52794
         });
         fileMenu.add(exportClassMenuItem);
 
@@ -218,15 +195,15 @@ public class ClassMainFrame extends JFrame {
             }
         });
         editMenu.add(removeClassMenuItem);
-        
+
         JMenuItem scoreOptionsMenuItem = new JMenuItem("Scoring Options");
         scoreOptionsMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-            	if (m_list.getSelectedIndex() != -1 && !ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().isEmpty()) {
+                if (m_list.getSelectedIndex() != -1 && !ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().isEmpty()) {
                     ScoringOptionsDialog sod = new ScoringOptionsDialog(that, "Scoring Options", so);
                     sod.setVisible(true);
-        		}
+                }
             }
         });
         editMenu.add(scoreOptionsMenuItem);
@@ -320,9 +297,7 @@ public class ClassMainFrame extends JFrame {
         searchText.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == 10) {
-                    tableModel.setSearchTerm(searchText.getText());
-                }
+                tableModel.setSearchTerm(searchText.getText());
             }
         });
 

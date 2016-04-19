@@ -6,7 +6,7 @@ public class MainDriver {
     	//SplashScreen s = new SplashScreen();
 
         //Now create main window of classes with list of classes just loaded
-        ClassMainFrame mainWindow = new ClassMainFrame("CU•N•CLASS");
+        ClassMainFrame mainWindow = new ClassMainFrame("CU-N-CLASS");//CUï¿½Nï¿½CLASS
 
         //Now set the visibility of the window to true
         mainWindow.setVisible(true);

@@ -11,6 +11,10 @@
             {
               "m_date": "Apr 18, 2016 12:00:00 PM",
               "m_status": "Absent"
+            },
+            {
+              "m_date": "Apr 19, 2016 12:00:00 PM",
+              "m_status": "Present"
             }
           ]
         },
@@ -23,6 +27,10 @@
             {
               "m_date": "Apr 18, 2016 12:00:00 PM",
               "m_status": "Present"
+            },
+            {
+              "m_date": "Apr 19, 2016 12:00:00 PM",
+              "m_status": "Absent"
             }
           ]
         },
@@ -35,6 +43,10 @@
             {
               "m_date": "Apr 18, 2016 12:00:00 PM",
               "m_status": "Present"
+            },
+            {
+              "m_date": "Apr 19, 2016 12:00:00 PM",
+              "m_status": "Present"
             }
           ]
         }
@@ -44,6 +56,953 @@
     {
       "m_students": [],
       "m_name": "XComm"
+    },
+    {
+      "m_students": [
+        {
+          "m_Firstname": "Jerk",
+          "m_Lastname": "Face",
+          "m_Username": "jf",
+          "m_CUID": "1245",
+          "m_dates": []
+        }
+      ],
+      "m_name": "Butts"
+    },
+    {
+      "m_students": [
+        {
+          "m_Firstname": "James",
+          "m_Lastname": "Hollowell",
+          "m_Username": "jthollo",
+          "m_CUID": "1",
+          "m_dates": [
+            {
+              "m_date": "Apr 19, 2016 12:00:00 PM",
+              "m_status": "Present"
+            }
+          ]
+        },
+        {
+          "m_Firstname": "Austin",
+          "m_Lastname": "Fitzpatrick",
+          "m_Username": "2",
+          "m_CUID": "2",
+          "m_dates": [
+            {
+              "m_date": "Apr 19, 2016 12:00:00 PM",
+              "m_status": "Absent"
+            }
+          ]
+        },
+        {
+          "m_Firstname": "Molly",
+          "m_Lastname": "Sullivan",
+          "m_Username": "mollyyyyy",
+          "m_CUID": "",
+          "m_dates": [
+            {
+              "m_date": "Apr 19, 2016 12:00:00 PM",
+              "m_status": "Present"
+            }
+          ]
+        }
+      ],
+      "m_name": "Hello"
+    },
+    {
+      "m_students": [
+        {
+          "m_Firstname": "Jonathan",
+          "m_Lastname": "Adams",
+          "m_Username": "jaadams",
+          "m_CUID": "C68141907",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Aon",
+          "m_Lastname": "Ali",
+          "m_Username": "aona",
+          "m_CUID": "C16020957",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Morgan",
+          "m_Lastname": "Ashby",
+          "m_Username": "mashby",
+          "m_CUID": "C20200254",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Austin",
+          "m_Lastname": "Baker",
+          "m_Username": "ajbaker",
+          "m_CUID": "C48453107",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Megan",
+          "m_Lastname": "Balas",
+          "m_Username": "mbalas",
+          "m_CUID": "C24272154",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Anne Marie",
+          "m_Lastname": "Barton",
+          "m_Username": "ambarto",
+          "m_CUID": "C16252594",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Abigayle",
+          "m_Lastname": "Berendsen",
+          "m_Username": "amberen",
+          "m_CUID": "C66526193",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Christopher",
+          "m_Lastname": "Billig",
+          "m_Username": "cbillig",
+          "m_CUID": "C19277666",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Casey",
+          "m_Lastname": "Boudinot",
+          "m_Username": "cboudin",
+          "m_CUID": "C64972039",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Shellie",
+          "m_Lastname": "Brandon",
+          "m_Username": "shellib",
+          "m_CUID": "C37817623",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jane",
+          "m_Lastname": "Braun",
+          "m_Username": "jbraun",
+          "m_CUID": "C17653024",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "William",
+          "m_Lastname": "Bryson",
+          "m_Username": "wbryson",
+          "m_CUID": "C20379109",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Bridget",
+          "m_Lastname": "Callahan",
+          "m_Username": "bkcalla",
+          "m_CUID": "C18511293",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Stephen",
+          "m_Lastname": "Chen",
+          "m_Username": "shchen",
+          "m_CUID": "C19868327",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Adam",
+          "m_Lastname": "Childers",
+          "m_Username": "achilde",
+          "m_CUID": "C37325213",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Peter",
+          "m_Lastname": "Clements",
+          "m_Username": "pgcleme",
+          "m_CUID": "C38385873",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Carley",
+          "m_Lastname": "Cofield",
+          "m_Username": "ccofiel",
+          "m_CUID": "C79305333",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Willie",
+          "m_Lastname": "Coleman",
+          "m_Username": "williec",
+          "m_CUID": "C18950876",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Kelly",
+          "m_Lastname": "Colwell",
+          "m_Username": "kmcolwe",
+          "m_CUID": "C50705590",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Daniel",
+          "m_Lastname": "Conner",
+          "m_Username": "dcconne",
+          "m_CUID": "C10565762",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Alison",
+          "m_Lastname": "Cooke",
+          "m_Username": "anc",
+          "m_CUID": "C36397649",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Timothy",
+          "m_Lastname": "Cuccio",
+          "m_Username": "tcuccio",
+          "m_CUID": "C44718280",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Ryan",
+          "m_Lastname": "Davis",
+          "m_Username": "rcd",
+          "m_CUID": "C19773913",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Samuel",
+          "m_Lastname": "Deweese",
+          "m_Username": "sdewees",
+          "m_CUID": "C49559902",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Ashley",
+          "m_Lastname": "Doctor",
+          "m_Username": "agdocto",
+          "m_CUID": "C42214167",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Michael",
+          "m_Lastname": "Donahue",
+          "m_Username": "mfdonah",
+          "m_CUID": "C16667921",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Francie",
+          "m_Lastname": "Dorger",
+          "m_Username": "fdorger",
+          "m_CUID": "C12545388",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Hannah",
+          "m_Lastname": "Drummond",
+          "m_Username": "hdrummo",
+          "m_CUID": "C20827481",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Alison",
+          "m_Lastname": "Dunn",
+          "m_Username": "adunn4",
+          "m_CUID": "C17596728",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Kylie",
+          "m_Lastname": "Easterlin",
+          "m_Username": "kyliee",
+          "m_CUID": "C20254567",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jared",
+          "m_Lastname": "Eller",
+          "m_Username": "jmeller",
+          "m_CUID": "C91503878",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Westley",
+          "m_Lastname": "Enfinger",
+          "m_Username": "wenfing",
+          "m_CUID": "C76456995",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Joanna",
+          "m_Lastname": "Engels",
+          "m_Username": "jengels",
+          "m_CUID": "C12810752",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Nancey",
+          "m_Lastname": "Fang",
+          "m_Username": "nfang",
+          "m_CUID": "C12985411",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Austin",
+          "m_Lastname": "Ferguson",
+          "m_Username": "amfergu",
+          "m_CUID": "C48835839",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Chloe",
+          "m_Lastname": "Finley",
+          "m_Username": "chloef",
+          "m_CUID": "C70905501",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Brian",
+          "m_Lastname": "Fletcher",
+          "m_Username": "bafletc",
+          "m_CUID": "C53795756",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Shavona",
+          "m_Lastname": "Gadson",
+          "m_Username": "sgadson",
+          "m_CUID": "C15006176",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Dylan",
+          "m_Lastname": "Glick",
+          "m_Username": "dglick",
+          "m_CUID": "C78064752",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jackson",
+          "m_Lastname": "Gruidl",
+          "m_Username": "jgruidl",
+          "m_CUID": "C69998372",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Morgan",
+          "m_Lastname": "Gumber",
+          "m_Username": "mgumber",
+          "m_CUID": "C20054061",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Adam",
+          "m_Lastname": "Halter",
+          "m_Username": "ahalter",
+          "m_CUID": "C90943785",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Breanna",
+          "m_Lastname": "Hampton",
+          "m_Username": "bmhampt",
+          "m_CUID": "C20372585",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Alexander",
+          "m_Lastname": "Harper",
+          "m_Username": "acharpe",
+          "m_CUID": "C93040999",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Michael",
+          "m_Lastname": "Harrison",
+          "m_Username": "mrh3",
+          "m_CUID": "C16667037",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Hunter",
+          "m_Lastname": "Harty",
+          "m_Username": "hnharty",
+          "m_CUID": "C65588229",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Karen",
+          "m_Lastname": "Hawkins",
+          "m_Username": "khawki3",
+          "m_CUID": "C15358434",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "David",
+          "m_Lastname": "Heimer",
+          "m_Username": "dheimer",
+          "m_CUID": "C95893550",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Liam",
+          "m_Lastname": "Helstrom",
+          "m_Username": "lhelstr",
+          "m_CUID": "C66031066",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Joshua",
+          "m_Lastname": "Henez",
+          "m_Username": "jhenez",
+          "m_CUID": "C14483322",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jessica",
+          "m_Lastname": "Herron",
+          "m_Username": "herron3",
+          "m_CUID": "C67351487",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Stephanie",
+          "m_Lastname": "Hertzog",
+          "m_Username": "shertzo",
+          "m_CUID": "C19000859",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Mary",
+          "m_Lastname": "Heustess",
+          "m_Username": "mheuste",
+          "m_CUID": "C53022484",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Lisa",
+          "m_Lastname": "Hieftje-Conley",
+          "m_Username": "lhieftj",
+          "m_CUID": "C12963063",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jennifer",
+          "m_Lastname": "Howe",
+          "m_Username": "jlhowe",
+          "m_CUID": "C65172248",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Catherine",
+          "m_Lastname": "Hyland",
+          "m_Username": "khyland",
+          "m_CUID": "C38241811",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Caroline",
+          "m_Lastname": "James",
+          "m_Username": "cjames6",
+          "m_CUID": "C20058538",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jett",
+          "m_Lastname": "Jones",
+          "m_Username": "jettj",
+          "m_CUID": "C95550460",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Sarah",
+          "m_Lastname": "Jordan",
+          "m_Username": "sjorda4",
+          "m_CUID": "C17867234",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Alex",
+          "m_Lastname": "Joyner",
+          "m_Username": "ajoyner",
+          "m_CUID": "C45385942",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Elijah",
+          "m_Lastname": "Judd",
+          "m_Username": "ezjudd",
+          "m_CUID": "C55814896",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Mackenna",
+          "m_Lastname": "Judge",
+          "m_Username": "mjudge",
+          "m_CUID": "C86465370",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Annelise",
+          "m_Lastname": "Kauffman",
+          "m_Username": "akauffm",
+          "m_CUID": "C17309985",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jalia",
+          "m_Lastname": "Kearse",
+          "m_Username": "jaliak",
+          "m_CUID": "C27468205",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Cameron",
+          "m_Lastname": "Kenworthy",
+          "m_Username": "ckenwor",
+          "m_CUID": "C15891609",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Cameron",
+          "m_Lastname": "Keramati",
+          "m_Username": "ckerama",
+          "m_CUID": "C11427264",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Tanner",
+          "m_Lastname": "Kinnett",
+          "m_Username": "tkinnet",
+          "m_CUID": "C88018914",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Peyton",
+          "m_Lastname": "Kinsey",
+          "m_Username": "pkinsey",
+          "m_CUID": "C18212593",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Allie",
+          "m_Lastname": "Kirk",
+          "m_Username": "akirk",
+          "m_CUID": "C10587776",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "John",
+          "m_Lastname": "Knight",
+          "m_Username": "jtknigh",
+          "m_CUID": "C59978247",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jacob",
+          "m_Lastname": "Koch",
+          "m_Username": "jpkoch",
+          "m_CUID": "C15685423",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Matthew",
+          "m_Lastname": "Lancaster",
+          "m_Username": "mblanca",
+          "m_CUID": "C99531653",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Caitlyn",
+          "m_Lastname": "Lankowski",
+          "m_Username": "clankow",
+          "m_CUID": "C02174532",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Sara",
+          "m_Lastname": "Lew",
+          "m_Username": "slew",
+          "m_CUID": "C10394243",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "William",
+          "m_Lastname": "Luttrell",
+          "m_Username": "wluttre",
+          "m_CUID": "C11570090",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Hayes",
+          "m_Lastname": "Martin",
+          "m_Username": "hayesm",
+          "m_CUID": "C61874969",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Timothy",
+          "m_Lastname": "Mays",
+          "m_Username": "tcmays",
+          "m_CUID": "C15314236",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Joseph",
+          "m_Lastname": "Mccorkle",
+          "m_Username": "jpmccor",
+          "m_CUID": "C16344186",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Andrew",
+          "m_Lastname": "Mcmillan",
+          "m_Username": "amcmil2",
+          "m_CUID": "C25525075",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Bonnie",
+          "m_Lastname": "Miller",
+          "m_Username": "bmille7",
+          "m_CUID": "C77946644",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Matthew",
+          "m_Lastname": "Moersen",
+          "m_Username": "mpmoers",
+          "m_CUID": "C54761488",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Margaret",
+          "m_Lastname": "Molloy",
+          "m_Username": "mmolloy",
+          "m_CUID": "C10147808",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Luke",
+          "m_Lastname": "Mount",
+          "m_Username": "lamount",
+          "m_CUID": "C90397747",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jackson",
+          "m_Lastname": "Moyd",
+          "m_Username": "jmoyd",
+          "m_CUID": "C16857254",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Levi",
+          "m_Lastname": "Neave",
+          "m_Username": "lneave",
+          "m_CUID": "C16246208",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jake",
+          "m_Lastname": "Newbill",
+          "m_Username": "jnewbil",
+          "m_CUID": "C77375758",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Elizabeth",
+          "m_Lastname": "Newell",
+          "m_Username": "newell2",
+          "m_CUID": "C84963536",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Austin",
+          "m_Lastname": "O\u0027Neill",
+          "m_Username": "aponeil",
+          "m_CUID": "C46589757",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Shannon",
+          "m_Lastname": "O\u0027Toole",
+          "m_Username": "sotoole",
+          "m_CUID": "C17053626",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Collin",
+          "m_Lastname": "Odell",
+          "m_Username": "cbodell",
+          "m_CUID": "C36022645",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jason",
+          "m_Lastname": "Oeckinghaus",
+          "m_Username": "joeckin",
+          "m_CUID": "C20003025",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Tyler",
+          "m_Lastname": "Owens",
+          "m_Username": "tylero",
+          "m_CUID": "C10375406",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "John",
+          "m_Lastname": "Pettit",
+          "m_Username": "jbpetti",
+          "m_CUID": "C52228570",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Chris",
+          "m_Lastname": "Poole",
+          "m_Username": "capoole",
+          "m_CUID": "C83175551",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Lillian",
+          "m_Lastname": "Poston",
+          "m_Username": "lilliap",
+          "m_CUID": "C38881539",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Joseph",
+          "m_Lastname": "Prewitt",
+          "m_Username": "jprewit",
+          "m_CUID": "C17716068",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "James",
+          "m_Lastname": "Reedy",
+          "m_Username": "jlreedy",
+          "m_CUID": "C31757982",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Peyton",
+          "m_Lastname": "Reeves",
+          "m_Username": "poreeve",
+          "m_CUID": "C30864275",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Elise",
+          "m_Lastname": "Regina",
+          "m_Username": "eregina",
+          "m_CUID": "C13209645",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Ian",
+          "m_Lastname": "Robinson",
+          "m_Username": "ibrobin",
+          "m_CUID": "C30438700",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Paige",
+          "m_Lastname": "Robinson",
+          "m_Username": "pwrobin",
+          "m_CUID": "C56679355",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Michael",
+          "m_Lastname": "Roeder",
+          "m_Username": "mroeder",
+          "m_CUID": "C17626158",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Payne",
+          "m_Lastname": "Russell",
+          "m_Username": "payner",
+          "m_CUID": "C92470873",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Sophia",
+          "m_Lastname": "Rybolt",
+          "m_Username": "srybolt",
+          "m_CUID": "C18657850",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Ethan",
+          "m_Lastname": "Schaeffer",
+          "m_Username": "ecschae",
+          "m_CUID": "C39982561",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Megan",
+          "m_Lastname": "Sease",
+          "m_Username": "masease",
+          "m_CUID": "C18352264",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Samantha",
+          "m_Lastname": "Simpson",
+          "m_Username": "ssimps5",
+          "m_CUID": "C18116046",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Tianci",
+          "m_Lastname": "Song",
+          "m_Username": "tiancis",
+          "m_CUID": "C88584745",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Anna",
+          "m_Lastname": "South",
+          "m_Username": "asouth",
+          "m_CUID": "C11159677",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Nathanael",
+          "m_Lastname": "Specht",
+          "m_Username": "nspecht",
+          "m_CUID": "C11270816",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Jonathon",
+          "m_Lastname": "Stoddart",
+          "m_Username": "jstodda",
+          "m_CUID": "C18393373",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Mary Harbert",
+          "m_Lastname": "Stromberg",
+          "m_Username": "mstromb",
+          "m_CUID": "C41613654",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Abigail",
+          "m_Lastname": "Thomas",
+          "m_Username": "art4",
+          "m_CUID": "C15924398",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Kevin",
+          "m_Lastname": "Tidd",
+          "m_Username": "ktidd",
+          "m_CUID": "C50598089",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "William",
+          "m_Lastname": "Tiller",
+          "m_Username": "wtiller",
+          "m_CUID": "C83073758",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Anna",
+          "m_Lastname": "Tindal",
+          "m_Username": "atindal",
+          "m_CUID": "C49274572",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Kyle",
+          "m_Lastname": "Tompkins",
+          "m_Username": "kitompk",
+          "m_CUID": "C33978623",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Madison",
+          "m_Lastname": "Tracey",
+          "m_Username": "metrace",
+          "m_CUID": "C82086482",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Karin",
+          "m_Lastname": "Tsang",
+          "m_Username": "ktsang",
+          "m_CUID": "C10849072",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Andrew",
+          "m_Lastname": "Weisser",
+          "m_Username": "aweisse",
+          "m_CUID": "C14353489",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Anne Cole",
+          "m_Lastname": "Werner",
+          "m_Username": "acwerne",
+          "m_CUID": "C19531136",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Michael",
+          "m_Lastname": "Whitney",
+          "m_Username": "mwhitne",
+          "m_CUID": "C29396198",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Hannah",
+          "m_Lastname": "Widener",
+          "m_Username": "hwidene",
+          "m_CUID": "C68986033",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Tyreek",
+          "m_Lastname": "Wilson",
+          "m_Username": "tyreekw",
+          "m_CUID": "C16211920",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Haley",
+          "m_Lastname": "Winstead",
+          "m_Username": "hwinste",
+          "m_CUID": "C13466937",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Cooper",
+          "m_Lastname": "Wolfe",
+          "m_Username": "cswolfe",
+          "m_CUID": "C55893252",
+          "m_dates": []
+        },
+        {
+          "m_Firstname": "Andrew",
+          "m_Lastname": "Zaloom",
+          "m_Username": "azaloom",
+          "m_CUID": "C17998351",
+          "m_dates": []
+        }
+      ],
+      "m_name": "Leeeeeland Comm"
     }
   ]
 }

@@ -23,13 +23,19 @@ public class StudentTableModel extends DefaultTableModel {
 
     public void setSearchTerm(String searchTerm) {
         this.term = searchTerm.toLowerCase();
+        String[] terms = this.term.split(" ");
         cachedSearchList.clear();
-        for (Student s : ClassDataStore.getInstance().getClasses().get(classId).getStudents()) {
-            if (s.getCUID().toLowerCase().contains(term)
-                    || s.getLastname().toLowerCase().contains(term)
-                    || s.getFirstname().toLowerCase().contains(term)
-                    || s.getUsername().toLowerCase().contains(term))
-                cachedSearchList.add(s);
+        if(classId < ClassDataStore.getInstance().getClasses().size()) {
+            for (Student s : ClassDataStore.getInstance().getClasses().get(classId).getStudents()) {
+                for (String t : terms)
+                    if (s.getCUID().toLowerCase().contains(t)
+                            || s.getLastname().toLowerCase().contains(t)
+                            || s.getFirstname().toLowerCase().contains(t)
+                            || s.getUsername().toLowerCase().contains(t)) {
+                        cachedSearchList.add(s);
+                        break;
+                    }
+            }
         }
         fireTableDataChanged();
     }
