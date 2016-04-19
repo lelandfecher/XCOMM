@@ -7,17 +7,17 @@ public class ScoringOptions
 	private double m_absentPoints; // The number of points for each date of absent is worth - used for CountDown method
 	private double m_tardyPoints; // The number of points for each date of tardy is worth - used for CountDown method
 	private double m_tardyRatio; // The percentage of a present that a tardy is worth as a value between 0 and 1 - used for Average method
-	private int m_graceAbsence; // The number of absences that will not be factored into the score (ex. Points will be deducted for each absence after 2)
-	private int m_graceTardy; // The number of tardies that will not be factored into the score
+	private double m_graceAbsence; // The number of absences that will not be factored into the score (ex. Points will be deducted for each absence after 2)
+	private double m_graceTardy; // The number of tardies that will not be factored into the score
 	private Method m_method; // The method use for determining the score - see enumerator Method
 	
 	public ScoringOptions()
 	{
 		m_max = 100;
-		m_presentPoints = 0;
-		m_absentPoints = 0;
+		m_presentPoints = 1;
+		m_absentPoints = 1;
 		m_tardyPoints = 0;
-		m_tardyRatio = 0;
+		m_tardyRatio = 50;
 		m_graceAbsence = 0;
 		m_graceTardy = 0;
 		m_method = Method.CountDown;
@@ -73,22 +73,22 @@ public class ScoringOptions
 		m_tardyRatio = points;
 	}
 
-	public int getNumGraceAbsences()
+	public double getNumGraceAbsences()
 	{
 		return m_graceAbsence;
 	}
 	
-	public void setNumGraceAbsences(int count)
+	public void setNumGraceAbsences(double count)
 	{
 		m_graceAbsence = count;
 	}
 	
-	public int getNumGraceTardies()
+	public double getNumGraceTardies()
 	{
 		return m_graceTardy;
 	}
 	
-	public void setNumGraceTardies(int count)
+	public void setNumGraceTardies(double count)
 	{
 		m_graceTardy = count;
 	}

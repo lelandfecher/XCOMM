@@ -17,11 +17,14 @@ public class ClassMainFrame extends JFrame {
     public final JTable m_table;
     private final StudentTableModel tableModel = new StudentTableModel();
     private Class_t whichClass;
+    private ScoringOptions so;
 
 
     public ClassMainFrame(String title) {
         //Call super constructor to set up JFrame
         super(title);
+        
+        so = new ScoringOptions();
 
         //For use in context where that is not the frame
         final ClassMainFrame that = this;
@@ -144,10 +147,9 @@ public class ClassMainFrame extends JFrame {
         			String file = fc.getSelectedFile().getPath();
         			if (!file.endsWith(".csv"))
         				file += ".csv";
-        			ScoringOptions opt = new ScoringOptions();
         			try
 					{
-						CSVPort.exportClass(ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()), file, opt);
+						CSVPort.exportClass(ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()), file, so);
 					} catch (FileNotFoundException e)
 					{
 						JOptionPane.showMessageDialog(ClassMainFrame.this, "Unable to save file!");
@@ -200,6 +202,18 @@ public class ClassMainFrame extends JFrame {
             }
         });
         editMenu.add(removeClassMenuItem);
+        
+        JMenuItem scoreOptionsMenuItem = new JMenuItem("Scoring Options");
+        scoreOptionsMenuItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            	if (m_list.getSelectedIndex() != -1 && !ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().isEmpty()) {
+                    ScoringOptionsDialog sod = new ScoringOptionsDialog(that, "Scoring Options", so);
+                    sod.setVisible(true);
+        		}
+            }
+        });
+        editMenu.add(scoreOptionsMenuItem);
 
         //Add about menu
         JMenu helpMenu = new JMenu("Help");

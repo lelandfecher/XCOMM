@@ -162,7 +162,7 @@ public class Student implements Serializable {
         if (method == Method.CountDown)
             score = opt.getMax() - (opt.getPointsPerAbsent() * absentCount) - (opt.getPointsPerTardy() * tardyCount);
         else if (method == Method.CountUp)
-            score = (opt.getPointsPerPresent() * presentCount) + ((opt.getTardyWorthPercent() / 100) * tardyCount);
+            score = (opt.getPointsPerPresent() * (presentCount + ((opt.getTardyWorthPercent() / 100) * tardyCount)));
         else if (method == Method.Average)
             score = (double) (presentCount + ((opt.getTardyWorthPercent() / 100) * tardyCount)) / (presentCount + tardyCount + absentCount) * 100;
 
