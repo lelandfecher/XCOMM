@@ -103,61 +103,54 @@ public class ClassMainFrame extends JFrame {
         //Add file menu
         JMenu fileMenu = new JMenu("File");
         menuBar.add(fileMenu);
-        
+
         JMenuItem importClassMenuItem = new JMenuItem("Import Class");
         importClassMenuItem.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseReleased(MouseEvent arg0) {
-        		JFileChooser fc = new JFileChooser();
-        		int status = fc.showOpenDialog(ClassMainFrame.this);
-        		if (status == JFileChooser.APPROVE_OPTION)
-        		{
-        			String name = JOptionPane.showInputDialog("Class name: ");
-        			if (name == null)
-        				name = fc.getSelectedFile().getPath().split(".")[0];
-        			Class_t cls = new Class_t(name);
-        			try
-					{
-						cls = CSVPort.importClass(cls, fc.getSelectedFile().getPath());
-						ClassDataStore.getInstance().getClasses().add(cls);
-						update_list(m_list);
-					} 
-        			catch (IOException e)
-					{
-						JOptionPane.showMessageDialog(ClassMainFrame.this, "Unable to open file!");
-					}
-        		}
-        	}
+            @Override
+            public void mouseReleased(MouseEvent arg0) {
+                JFileChooser fc = new JFileChooser();
+                int status = fc.showOpenDialog(ClassMainFrame.this);
+                if (status == JFileChooser.APPROVE_OPTION) {
+                    String name = JOptionPane.showInputDialog("Class name: ");
+                    if (name == null)
+                        name = fc.getSelectedFile().getPath().split(".")[0];
+                    Class_t cls = new Class_t(name);
+                    try {
+                        cls = CSVPort.importClass(cls, fc.getSelectedFile().getPath());
+                        ClassDataStore.getInstance().getClasses().add(cls);
+                        update_list(m_list);
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(ClassMainFrame.this, "Unable to open file!");
+                    }
+                }
+            }
         });
         fileMenu.add(importClassMenuItem);
-        
+
         JMenuItem exportClassMenuItem = new JMenuItem("Export Class");
         exportClassMenuItem.addMouseListener(new MouseAdapter() {
-        	@Override
-        	public void mouseReleased(MouseEvent arg0) {
-        		JFileChooser fc = new JFileChooser();
-        		FileNameExtensionFilter filter = new FileNameExtensionFilter(".csv", "csv");
-        		fc.setFileFilter(filter);
-        		int status = fc.showSaveDialog(ClassMainFrame.this);
-        		if (status == JFileChooser.APPROVE_OPTION)
-        		{
-        			String file = fc.getSelectedFile().getPath();
-        			if (!file.endsWith(".csv"))
-        				file += ".csv";
-        			ScoringOptions opt = new ScoringOptions();
-        			try
-					{
-						CSVPort.exportClass(ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()), file, opt);
-					} catch (FileNotFoundException e)
-					{
-						JOptionPane.showMessageDialog(ClassMainFrame.this, "Unable to save file!");
-					}
-        		}
-        	}
+            @Override
+            public void mouseReleased(MouseEvent arg0) {
+                JFileChooser fc = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(".csv", "csv");
+                fc.setFileFilter(filter);
+                int status = fc.showSaveDialog(ClassMainFrame.this);
+                if (status == JFileChooser.APPROVE_OPTION) {
+                    String file = fc.getSelectedFile().getPath();
+                    if (!file.endsWith(".csv"))
+                        file += ".csv";
+                    ScoringOptions opt = new ScoringOptions();
+                    try {
+                        CSVPort.exportClass(ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()), file, opt);
+                    } catch (FileNotFoundException e) {
+                        JOptionPane.showMessageDialog(ClassMainFrame.this, "Unable to save file!");
+                    }
+                }
+            }
         });
         fileMenu.add(exportClassMenuItem);
-        
-      //Add exit item on file menu to exit program and save data
+
+        //Add exit item on file menu to exit program and save data
         JMenuItem exitMenuItem = new JMenuItem("Exit", KeyEvent.VK_E);
         exitMenuItem.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent arg0) {
@@ -170,8 +163,7 @@ public class ClassMainFrame extends JFrame {
             }
         });
         fileMenu.add(exitMenuItem);
-        
-        
+
 
         //Add edit menu
         JMenu editMenu = new JMenu("Edit");
@@ -181,7 +173,7 @@ public class ClassMainFrame extends JFrame {
         addClassMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent arg0) {
-            	Frame f = new Frame();
+                Frame f = new Frame();
                 String name = JOptionPane.showInputDialog(f, "Class name:", "Add New Class", JOptionPane.QUESTION_MESSAGE);
                 if (name != null) {
                     ClassDataStore.getInstance().getClasses().add(new Class_t(name));
@@ -223,34 +215,24 @@ public class ClassMainFrame extends JFrame {
         final JButton addButton = new JButton("Add Student");
         final JButton editButton = new JButton("Edit Student");
         final JButton deleteButton = new JButton("Delete Student");
-        
-        takeAttendanceBtn.addMouseListener(new MouseAdapter() {
-        	public void mouseReleased(MouseEvent e) {
 
-	        	//if a class is selected
-        		if (m_list.getSelectedIndex() != -1 && !ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().isEmpty()) {
-        			//Ask for date then take attendance
-	        		Date date = new Date();
+        takeAttendanceBtn.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+
+                //if a class is selected
+                if (m_list.getSelectedIndex() != -1 && !ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().isEmpty()) {
+                    //Ask for date then take attendance
+                    Date date = new Date();
                     DateSelectionDlg dsd = new DateSelectionDlg(that, "Please Enter Date", date, m_list.getSelectedIndex());
                     dsd.setVisible(true);
-        		}
-        	}
+                }
+            }
 
         });
         buttonPanel.add(takeAttendanceBtn, BorderLayout.SOUTH);
         if (m_list.getSelectedIndex() == -1)
             takeAttendanceBtn.setEnabled(false);
 
-//        checkAttendanceBtn.addMouseListener(new MouseAdapter() {
-//        	public void mouseReleased(MouseEvent e) {
-//        		//TODO
-//        		//Ask for date
-//        		//Show attendance for each student in selected Class for specific date
-//        	}
-//        });
-//        buttonPanel.add(checkAttendanceBtn, BorderLayout.SOUTH);
-//        if (m_list.getSelectedIndex() == -1)
-//        	checkAttendanceBtn.setEnabled(false);
 
         addButton.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
@@ -292,6 +274,36 @@ public class ClassMainFrame extends JFrame {
         if (m_table.getSelectedRow() == -1)
             deleteButton.setEnabled(false);
 
+        JPanel searchPanel = new JPanel();
+        searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.X_AXIS));
+        final JTextField searchText = new JTextField(20);
+        searchText.setMaximumSize(new Dimension(300, 25));
+
+        searchText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == 10) {
+                    tableModel.setSearchTerm(searchText.getText());
+                }
+            }
+        });
+
+        JButton searchButton = new JButton("Search Students");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tableModel.setSearchTerm(searchText.getText());
+            }
+        });
+
+
+        searchPanel.add(searchText);
+        searchPanel.add(Box.createRigidArea(new Dimension(5, 5)));
+        searchPanel.add(searchButton);
+
+        menuBar.add(Box.createRigidArea(new Dimension(280, 0)));
+        menuBar.add(searchPanel);
+
         JScrollPane leftScrollPane = new JScrollPane(m_list);
         JScrollPane rightScrollPane = new JScrollPane(m_table);
 
@@ -306,7 +318,7 @@ public class ClassMainFrame extends JFrame {
         //Set colors
         Color orange = new Color(234, 106, 32);
         Color purple = new Color(82, 45, 128);
-        Color white = new Color(255,255,255);
+        Color white = new Color(255, 255, 255);
         mainPanel.setBackground(purple);
         m_list.setForeground(white);
         m_table.setForeground(purple);
@@ -355,8 +367,8 @@ public class ClassMainFrame extends JFrame {
                 deleteButton.setEnabled(false);
                 addButton.setEnabled(true);
 
-                if(ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().isEmpty()) {
-                	takeAttendanceBtn.setEnabled(false);
+                if (ClassDataStore.getInstance().getClasses().get(m_list.getSelectedIndex()).getStudents().isEmpty()) {
+                    takeAttendanceBtn.setEnabled(false);
 //                	checkAttendanceBtn.setEnabled(false);
                 }
             }
