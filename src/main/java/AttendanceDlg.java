@@ -25,7 +25,7 @@ public class AttendanceDlg extends JDialog {
 
 
         //Set Icon image
-        this.setIconImage(new ImageIcon("tigerpaw.jpg").getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("tigerpaw.jpg")).getImage());
 
         //Center it on screen by finding screen dimensions
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

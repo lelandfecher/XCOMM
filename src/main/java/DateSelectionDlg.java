@@ -19,7 +19,7 @@ public class DateSelectionDlg extends JDialog {
 
         super(frame, title, true);
 		this.setSize(new Dimension(300, 150));
-        this.setIconImage(new ImageIcon("tigerpaw.jpg").getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("tigerpaw.jpg")).getImage());
 		
 		m_date = date;
 		

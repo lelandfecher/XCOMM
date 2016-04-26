@@ -21,7 +21,7 @@ public class StudentEditingDlg extends JDialog {
         //Call super constructor and set size
         super(frame, title, true);
         this.setSize(new Dimension(200, 400));
-        this.setIconImage(new ImageIcon("tigerpaw.jpg").getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("tigerpaw.jpg")).getImage());
 
         //Center on screen
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -116,7 +116,7 @@ public class StudentEditingDlg extends JDialog {
     public StudentEditingDlg(Frame frame, String title, final JTable table, final int rowIndex, final int whichClass) {
         super(frame, title, true);
         this.setSize(200, 400);
-        this.setIconImage(new ImageIcon("tigerpaw.jpg").getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("tigerpaw.jpg")).getImage());
 
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);

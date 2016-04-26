@@ -25,7 +25,7 @@ public class ScoringOptionsDialog extends JDialog
 	{
 		super(frame, title, true);
 		this.setSize(new Dimension(400, 500));
-        this.setIconImage(new ImageIcon("tigerpaw.jpg").getImage());
+        this.setIconImage(new ImageIcon(getClass().getResource("tigerpaw.jpg")).getImage());
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         

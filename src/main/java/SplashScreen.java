@@ -12,7 +12,7 @@ public class SplashScreen extends JWindow {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	Image img = Toolkit.getDefaultToolkit().getImage("catPic.jpg"); 
+	Image img = new ImageIcon(getClass().getResource("catPic.jpg")).getImage();
 	ImageIcon imgicon = new ImageIcon(img); 
 	
 	public SplashScreen() { 
