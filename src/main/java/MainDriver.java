@@ -3,10 +3,10 @@ public class MainDriver {
 
     	//CAT SPLASH SCREEN!!
     	//Comment out for now for testing/time purposes
-    	//SplashScreen s = new SplashScreen();
+    	SplashScreen s = new SplashScreen();
 
         //Now create main window of classes with list of classes just loaded
-        ClassMainFrame mainWindow = new ClassMainFrame("CU-N-CLASS");//CU�N�CLASS
+        ClassMainFrame mainWindow = new ClassMainFrame("CU-IN-CLASS");//CU�N�CLASS
 
         //Now set the visibility of the window to true
         mainWindow.setVisible(true);
